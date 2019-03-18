@@ -6,6 +6,8 @@ import stuInfoMg from '@/views/StuInfoMg'
 import AddStuInfo from '@/views/AddStuInfo'
 import showBiogenicDis from '@/views/ShowBiogenicDis'
 import showeEploymentDis from '@/views/ShoweEploymentDis'
+import recruit from '@/views/recruit'
+import help from '@/views/help'
 
 Vue.use(Router)
 
@@ -42,6 +44,16 @@ export default new Router({
           path: 'showeEploymentDis',
           name: 'showeEploymentDis',
           component: showeEploymentDis
+        },
+        {
+          path: 'recruit',
+          name: 'recruit',
+          component: recruit
+        },
+        {
+          path: 'help',
+          name: 'help',
+          component: help
         }
       ]
     }
