@@ -2,38 +2,35 @@
     <div class="addStuInfo">
       <table>
         <thead>
-          <tr><td colspan="2">新建校友信息</td></tr>
+          <tr><td colspan="2">校友帮扶</td></tr>
         </thead>
         <tbody>
           <tr>
-            <td><label for="">学号：</label></td>
+            <td><label for="">帮扶人：</label></td>
             <td><el-input v-model="stuID" placeholder="请输入内容"></el-input></td>
           </tr>
           <tr>
-            <td><label for="">姓名：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
+            <td><label for="">简介：</label></td>
+            <td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入帮扶人简介"
+                v-model="recruitIntention">
+              </el-input>
+            </td>
           </tr>
           <tr>
-            <td><label for="">专业：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
+            <td><label for="">事迹</label></td>
+            <td>
+              <el-input
+                type="textarea"
+                :rows="6"
+                placeholder="请输入招聘意向"
+                v-model="recruitIntention">
+              </el-input>
+            </td>
           </tr>
-          <tr>
-            <td><label for="">毕业年月：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
-          </tr>
-          <tr>
-            <td><label for="">工作单位：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
-          </tr>
-          <tr>
-            <td><label for="">就业省市：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
-          </tr>
-          <tr>
-            <td><label for="">生源地：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入内容"></el-input></td>
-          </tr>
-
           <tr>
             <!-- <el-row> -->
             <td colspan="2">
@@ -50,7 +47,7 @@
 import Vheader from '@/components/Vheader.vue'
 import Vslider from '@/components/Vslider.vue'
 export default {
-  name: 'AddStuIngo',
+  name: 'home',
   components: {
     Vheader,
     Vslider
@@ -67,7 +64,6 @@ export default {
         position:relative;
         margin:0 auto;
         table{
-          padding-top:20px;
           width:90%;
           position:absolute;
           left:50%;
@@ -77,7 +73,7 @@ export default {
         thead{
           td{
             text-align:center;
-            line-height:30px;
+            line-height:70px;
           }
         }
         tbody{

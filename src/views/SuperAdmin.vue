@@ -3,26 +3,15 @@
         <div class="statusBar">
             <label>学生信息列表</label>
         </div>
-        <div class="searchBar">
-            <label>年级</label><input type = "text"/>
-            <label>专业</label><input type = "text"/>
-            <label>班级</label><input type = "text"/>
-            <label>姓名</label><input type = "text"/>
-            <button>搜索</button>
-        </div>
-        <div class="stuInfoTable">
+        <div class="adminInfoTable">
             <table>
                 <thead>
                     <tr>
                         <td>序号</td>
-                        <td>学号</td>
+                        <td>管理员</td>
                         <td>姓名</td>
                         <td>专业</td>
-                        <td>毕业年份</td>
-                        <td>工作单位</td>
-                        <td>就业省市</td>
-                        <td>生源地</td>
-                        <td class="setting">操作</td>
+                        <td>操作</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -162,7 +151,7 @@
 
 <script>
 export default {
-  name: 'stuInfoMg'
+  name: 'superAdmin'
 }
 </script>
 
@@ -186,16 +175,12 @@ export default {
         }
         .stuInfoTable{
             padding:0 30px 0 0;
-            width:1100px;
             table{
                 width:100%;
                 border-collapse: collapse;
                 thead{
                     text-align:center;
                     background-color: #52baf6;
-                    .setting{
-                        width:200px;
-                    }
                 }
                 tbody{
                     td{

@@ -8,12 +8,12 @@
                 <div class='itemWrap'><router-link to="/home/showeEploymentDis" class="item">显示生源分布</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="班级与专业管理">
-                <div class='itemWrap'><router-link to="/" class="item">班级信息列表</router-link></div>
-                <div class='itemWrap'><router-link to="/" class="item">专业信息列表</router-link></div>
+                <div class='itemWrap'><router-link to="/home/classInfo" class="item">班级信息列表</router-link></div>
+                <div class='itemWrap'><router-link to="/home/majorInfo" class="item">专业信息列表</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="校友互助">
-                <div class='itemWrap'><router-link to="/" class="item">校友招聘</router-link></div>
-                <div class='itemWrap'><router-link to="/" class="item">校友帮扶</router-link></div>
+                <div class='itemWrap'><router-link to="/home/recruit" class="item">校友招聘</router-link></div>
+                <div class='itemWrap'><router-link to="/home/help" class="item">校友帮扶</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="管理员管理">
                 <div class='itemWrap'><router-link to="/" class="item">普通管理员</router-link></div>
