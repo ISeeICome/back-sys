@@ -6,8 +6,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">帮扶人：</label></td>
-            <td><el-input v-model="stuID" placeholder="请输入内容"></el-input></td>
+            <td><label for="">帮扶人学号：</label></td>
+            <td><el-input v-model="stuID" placeholder="请输入帮扶人学号"></el-input></td>
+          </tr>
+          <tr>
+            <td><label for="">帮扶人姓名：</label></td>
+            <td><el-input v-model="stuName" placeholder="请输入帮扶人姓名"></el-input></td>
           </tr>
           <tr>
             <td><label for="">简介：</label></td>
@@ -16,7 +20,7 @@
                 type="textarea"
                 :rows="6"
                 placeholder="请输入帮扶人简介"
-                v-model="recruitIntention">
+                v-model="helpInrtoduction">
               </el-input>
             </td>
           </tr>
@@ -26,17 +30,15 @@
               <el-input
                 type="textarea"
                 :rows="6"
-                placeholder="请输入招聘意向"
+                placeholder="请输入帮扶人具体事迹"
                 v-model="recruitIntention">
               </el-input>
             </td>
           </tr>
           <tr>
-            <!-- <el-row> -->
             <td colspan="2">
               <el-button type="success">提交</el-button>
             </td>
-            <!-- </el-row> -->
           </tr>
         </tbody>
       </table>
@@ -51,6 +53,13 @@ export default {
   components: {
     Vheader,
     Vslider
+  },
+  data () {
+    return {
+      stuName: '',
+      stuID: '',
+      helpInrtoduction: ''
+    }
   }
 }
 </script>

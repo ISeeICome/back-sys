@@ -23,10 +23,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -36,10 +34,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -49,10 +45,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -62,10 +56,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -75,10 +67,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -88,10 +78,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -101,10 +89,8 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -114,10 +100,19 @@
                         <td>计算机系</td>
                         <td>信息与机电工程学院</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>001</td>
+                        <td>计算机科学与技术</td>
+                        <td>计算机系</td>
+                        <td>信息与机电工程学院</td>
+                        <td>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                 </tbody>

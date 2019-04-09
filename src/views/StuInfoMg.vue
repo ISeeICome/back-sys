@@ -36,10 +36,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -52,10 +50,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -68,10 +64,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -84,10 +78,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -100,10 +92,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -116,10 +106,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -132,10 +120,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
@@ -148,10 +134,8 @@
                         <td>江苏省</td>
                         <td>黑龙江</td>
                         <td>
-                            <el-row>
-                                <el-button type="primary" class='update'>修改</el-button>
-                                <el-button type="danger"  class='del'>删除</el-button>
-                            </el-row>
+                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                 </tbody>
