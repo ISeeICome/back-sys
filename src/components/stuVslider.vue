@@ -15,7 +15,7 @@
             </el-collapse-item>
         </el-collapse>
         <div class="admin">
-            管理员：李伟梁
+            用户：李青
         </div>
     </div>
 </template>

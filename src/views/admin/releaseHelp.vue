@@ -29,10 +29,10 @@
           </tr>
           <tr>
             <td>
-              <el-button type="success">提交</el-button>
+              <el-button type="primary" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="primary">返回</el-button>
+              <el-button type="success" id="subBtn">提交</el-button>
             </td>
           </tr>
         </tbody>
@@ -105,10 +105,9 @@ export default {
             }
           }
         }
-        .el-button--success{
+        #subBtn{
           float:right;
-          margin-right:60px;
-          margin-top:20px;
+          margin-right:50px;
         }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="slider">
         <el-collapse accordion>
-            <el-collapse-item title="校友信息管理">
+            <el-collapse-item title="信息管理">
                 <div class='itemWrap'><router-link to="/admin/showBiogenicDis" class="item">校友统计</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/majorManage" class="item">专业管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/classManage" class="item">班级管理</router-link></div>
@@ -14,7 +14,6 @@
             </el-collapse-item>
             <el-collapse-item title="管理员管理">
                 <div class='itemWrap'><router-link to="/admin/commonAdmin" class="item">普通管理员</router-link></div>
-                <div class='itemWrap'><router-link to="/admin/addAdmin" class="item">添加管理员</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/superAdmin" class="item">超级管理员</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="系统工具">

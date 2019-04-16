@@ -9,7 +9,7 @@
                     <tr class="tableName"><td colspan="4">普通管理员信息表</td></tr>
                     <tr>
                         <td>序号</td>
-                        <td>管理员</td>
+                        <td>管理员姓名</td>
                         <td>密码</td>
                         <td class="setting">操作</td>
                     </tr>
@@ -56,11 +56,12 @@
                         </td>
                     </tr>
                 </tbody>
-                <ol>
-                    <li><el-button type="success" id="prevBtn">上一页</el-button></li>
-                    <li><el-button type="success" id="nextBtn">下一页</el-button></li>
-                </ol>
             </table>
+            <ol>
+                <li><el-button type="success" id="prevBtn">上一页</el-button></li>
+                <li><el-button type="success" id="nextBtn">下一页</el-button></li>
+            </ol>
+            <el-button type="primary"  class='add' @click="toAddCommonAdmin">添加</el-button>
         </div>
         <!-- <div class="addAdmin">
             <table>
@@ -88,7 +89,12 @@
 
 <script>
 export default {
-  name: 'superAdmin'
+  name: 'superAdmin',
+  methods: {
+    toAddCommonAdmin () {
+      this.$router.push({path: '/admin/addAdmin'})
+    }
+  }
 }
 </script>
 
@@ -111,7 +117,7 @@ export default {
             padding:0 30px 0 0;
             margin-top: 20px;
             table{
-                width:800px;
+                width:1000px;
                 border-collapse: collapse;
                 margin:0 auto;
                 thead{
@@ -184,12 +190,17 @@ export default {
     }
     ol{
         position:absolute;
-        right:200px;
+        left:300px;
         width:300px;
         height:40px;
         li{
             float:left;
             margin:0 10px;
         }
+    }
+    .add{
+        position:absolute;
+        right:300px;
+        margin-top:10px;
     }
 </style>
