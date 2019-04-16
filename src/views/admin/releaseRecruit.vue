@@ -1,5 +1,8 @@
 <template>
     <div class="recruitInfo">
+      <div class="statusBar">
+          <label>发布招聘信息</label>
+      </div>
       <table>
         <thead>
           <tr><td colspan="2">校友招聘</td></tr>
@@ -10,22 +13,11 @@
             <td><el-input v-model="uName" placeholder="请输入招聘人姓名"></el-input></td>
           </tr>
           <tr>
-            <td><label for="">招聘方信息：</label></td>
-            <td>
-              <el-input
-                type="textarea"
-                :rows="6"
-                placeholder="请输入招聘方信息"
-                v-model="recruitInfo">
-              </el-input>
-            </td>
-          </tr>
-          <tr>
             <td><label for="">招聘意向：</label></td>
             <td>
               <el-input
                 type="textarea"
-                :rows="6"
+                :rows="11"
                 placeholder="请输入招聘意向"
                 v-model="recruitIntention">
               </el-input></td>
@@ -35,11 +27,12 @@
             <td><el-input v-model="workAddress" placeholder="请输入工作地址"></el-input></td>
           </tr>
           <tr>
-            <!-- <el-row> -->
-            <td colspan="2">
+            <td>
               <el-button type="success">提交</el-button>
             </td>
-            <!-- </el-row> -->
+            <td>
+              <el-button type="primary">返回</el-button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -48,17 +41,16 @@
 
 <script>
 import Vheader from '@/components/Vheader.vue'
-import Vslider from '@/components/Vslider.vue'
+import adminVslider from '@/components/adminVslider.vue'
 export default {
   name: 'home',
   components: {
     Vheader,
-    Vslider
+    adminVslider
   },
   data () {
     return {
       uName: '',
-      recruitInfo: '',
       recruitIntention: '',
       workAddress: ''
     }
@@ -68,14 +60,24 @@ export default {
 
 <style lang="scss" scoped>
   .recruitInfo{
-        width:800px;
-        margin: 0 auto;
+        width:1300px;
         padding:10px 0 0 15px;
         margin-left:180px;
         position:relative;
-        margin:0 auto;
+        .statusBar{
+            padding:10px 0 0 0;
+            height:30px;
+            width:100%;
+            border-bottom:1px dashed #d9dfe4;
+            label{
+                border-left:2px solid #2a94de;
+                padding-left:20px;
+                font-size:16px;
+            }
+        }
         table{
-          width:90%;
+          margin-top:30px;
+          width:55%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);

@@ -1,10 +1,14 @@
 <template>
     <div class="login">
         <h1 class="logo">
+            <!-- <img src="../../static/img/logo.png" alt="" class="logoImg"> -->
             <img src="../../static/img/login_logo.png" alt="">
         </h1>
         <div class="form">
-            <p class="title">登&ensp;&ensp;&ensp;陆</p>
+            <p class="title">
+                <img src="../../static/img/logo.png" alt="" class="logoImg">
+                登&ensp;&ensp;&ensp;陆
+            </p>
             <p>
                 <label for="">用户名：</label>
                 <el-input
@@ -24,7 +28,8 @@
                 </el-input>
             </p>
             <p>
-                <el-button type="primary" round id="loginBtn" ref="loginBtn" v-on:click="loginFn">登&ensp;&ensp;录</el-button>
+                <el-button type="primary" round id="loginBtn" ref="loginStuBtn" v-on:click="loginStuFn">校友登录</el-button>
+                <el-button type="primary" round id="loginBtn" ref="loginAdminBtn" v-on:click="loginAdminFn">管理员登录</el-button>
             </p>
         </div>
     </div>
@@ -39,17 +44,14 @@ export default {
     }
   },
   methods: {
-    loginFn () {
-      console.log(this)
-      this.$router.push({path: '/home/stuInfoMg'})
+    loginStuFn () {
+      this.$router.push({path: '/stu/personInfo'})
+    },
+    loginAdminFn () {
+      this.$router.push({path: '/admin/showBiogenicDis'})
     }
   },
   mounted () {
-    // var that = this
-    console.log(this.$refs.loginBtn)
-    this.$refs.loginBtn.onclick = function () {
-      console.log(11)
-    }
   }
 }
 </script>
@@ -63,6 +65,14 @@ export default {
     width:100%;
     height:100px;
     position: relative;
+    .logoImg{
+        position: absolute;
+        top:30px;
+        width:110px;
+        height:110px;
+        left:30%;
+        // margin-left:-300px;
+    }
     img{
         position: absolute;
         top:-60px;
@@ -84,6 +94,13 @@ export default {
         font-size: 28px;
         color:#333;
         line-height:50px;
+        .logoImg{
+            width:40px;
+            height:40px;
+            position:absolute;
+            left:30px;
+            top:8px;
+        }
     }
     p{
         clear: both;
@@ -101,6 +118,11 @@ export default {
     .el-input{
         width:240px;
         float:right;
+    }
+    .el-button{
+        padding:0;
+        width:120px;
+        line-height:36px;
     }
 }
 </style>

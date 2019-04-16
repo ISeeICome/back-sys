@@ -1,7 +1,7 @@
 <template>
     <div class="classInfo">
         <div class="statusBar">
-            <label>班级信息列表</label>
+            <label>专业信息列表</label>
         </div>
         <div class="classInfoTable">
             <table>
@@ -9,11 +9,9 @@
                     <tr>
                         <td>序号</td>
                         <td>班级ID</td>
-                        <td>班级名称</td>
+                        <td>专业</td>
                         <td>年级</td>
-                        <td>系别</td>
-                        <td>学院</td>
-                        <td>人数</td>
+                        <td>班级名称</td>
                         <td class="setting">操作</td>
                     </tr>
                 </thead>
@@ -21,116 +19,95 @@
                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>1</td>
                         <td>001</td>
-                        <td>非师（1）班</td>
+                        <td>计算机科学与技术</td>
                         <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
+                        <td>师范1班</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>001</td>
-                        <td>非师（1）班</td>
-                        <td>2015</td>
-                        <td>计算机系</td>
-                        <td>信息与机电工程学院</td>
-                        <td>48</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <el-button type="primary"  class='add' @click="toAddClass">添加</el-button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'stuInfo'
+  name: 'majorInfo',
+  methods: {
+    toAddClass () {
+      this.$router.push({path: '/admin/addClass'})
+    }
+  }
 }
 </script>
 
@@ -154,11 +131,13 @@ export default {
         }
         .classInfoTable{
             padding:0 30px 0 0;
-            width:1100px;
+            width: 1300px;
             table{
-                width:100%;
+                width: 100%;
+                margin:20px 0 0 0;
                 border-collapse: collapse;
                 thead{
+                    line-height:40px;
                     text-align:center;
                     background-color: #52baf6;
                     .setting{
@@ -167,7 +146,7 @@ export default {
                 }
                 tbody{
                     td{
-                        padding-left:10px;
+                        text-align: center;
                     }
                 }
                 td{
@@ -183,6 +162,11 @@ export default {
             float:right;
             margin-right:20px;
 
+        }
+        .add{
+            float:right;
+            margin-right:20px;
+            margin-top:20px;
         }
     }
 </style>

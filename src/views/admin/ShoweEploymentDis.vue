@@ -7,7 +7,7 @@
 
 <script>
 import Vheader from '@/components/Vheader.vue'
-import Vslider from '@/components/Vslider.vue'
+import adminVslider from '@/components/adminVslider.vue'
 
 // 引入 ECharts 主模块
 var echarts = require('echarts/lib/echarts')
@@ -21,7 +21,7 @@ export default {
   name: 'ShoweEploymentDis',
   components: {
     Vheader,
-    Vslider
+    adminVslider
   },
   methods: {
     createEchart (el, option) {

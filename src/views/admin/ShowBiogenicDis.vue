@@ -1,5 +1,8 @@
 <template>
     <div class="showBiogenicDis">
+      <div class="statusBar">
+            <label>校友统计</label>
+        </div>
       <div id="echart1"></div>
       <div id="echart2"></div>
     </div>
@@ -7,7 +10,7 @@
 
 <script>
 import Vheader from '@/components/Vheader.vue'
-import Vslider from '@/components/Vslider.vue'
+import adminVslider from '@/components/adminVslider.vue'
 
 // 引入 ECharts 主模块
 var echarts = require('echarts/lib/echarts')
@@ -23,7 +26,7 @@ export default {
   name: 'showBiogenicDis',
   components: {
     Vheader,
-    Vslider
+    adminVslider
   },
   methods: {
     createEchart (el, option) {
@@ -94,15 +97,30 @@ export default {
     padding:10px 0 0 15px;
     margin-left:180px;
     position:relative;
+    .statusBar{
+        padding:10px 0 0 0;
+        height:30px;
+        width:100%;
+        border-bottom:1px dashed #d9dfe4;
+        label{
+            border-left:2px solid #2a94de;
+            padding-left:20px;
+            font-size:16px;
+        }
+    }
     #echart1{
       height:400px;
       width:400px;
       float:left;
+      margin-left:30px;
+      margin-top:40px;
     }
     #echart2{
-      height:400px;
+      height:500px;
       width:800px;
       float:left;
+      margin-left:50px;
+      margin-top:40px;
     }
   }
 </style>

@@ -5,11 +5,12 @@ import App from './App'
 import router from './router'
 import '@/assets/css/basic.css'
 import '@/assets/css/font-awesome.min.css'
-import {Collapse, CollapseItem, Button, Input} from 'element-ui'
+import {Collapse, CollapseItem, Button, Input, Select} from 'element-ui'
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Button)
 Vue.use(Input)
+Vue.use(Select)
 
 Vue.config.productionTip = false
 

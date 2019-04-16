@@ -1,160 +1,120 @@
 <template>
-    <div class="stuInfo">
+    <div class="majorInfo">
         <div class="statusBar">
-            <label>学生信息列表</label>
+            <label>专业信息列表</label>
         </div>
-        <div class="adminInfoTable">
+        <div class="majorInfoTable">
             <table>
                 <thead>
                     <tr>
                         <td>序号</td>
-                        <td>管理员</td>
-                        <td>姓名</td>
-                        <td>专业</td>
-                        <td>操作</td>
+                        <td>专业ID</td>
+                        <td>专业名称</td>
+                        <td class="setting">操作</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td>B2014102136</td>
-                        <td>王强</td>
+                        <td>001</td>
                         <td>计算机科学与技术</td>
-                        <td>2018</td>
-                        <td>阿里巴巴</td>
-                        <td>江苏省</td>
-                        <td>黑龙江</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
+                            <el-button type="warning" class='update'>修改</el-button>
                             <el-button type="danger"  class='del'>删除</el-button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <el-button type="primary"  class='add' @click = "toAddMajor">添加</el-button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'superAdmin'
+  name: 'majorInfo',
+  methods: {
+    toAddMajor () {
+      this.$router.push({path: '/admin/addMajor'})
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-    .stuInfo{
+    .majorInfo{
         padding:10px 0 0 15px;
         margin-left:180px;
         .statusBar{
@@ -171,18 +131,24 @@ export default {
         .searchBar{
             height:60px;
         }
-        .stuInfoTable{
+        .majorInfoTable{
             padding:0 30px 0 0;
+            width: 1300px;
             table{
-                width:100%;
+                width: 100%;
+                margin:20px 0 0 0;
                 border-collapse: collapse;
                 thead{
+                    line-height:40px;
                     text-align:center;
                     background-color: #52baf6;
+                    .setting{
+                        width:200px;
+                    }
                 }
                 tbody{
                     td{
-                        padding-left:10px;
+                        text-align: center;
                     }
                 }
                 td{
@@ -198,6 +164,11 @@ export default {
             float:right;
             margin-right:20px;
 
+        }
+        .add{
+            float:right;
+            margin-right:20px;
+            margin-top:20px;
         }
     }
 </style>

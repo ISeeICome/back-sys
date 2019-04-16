@@ -1,5 +1,8 @@
 <template>
     <div class="addStuInfo">
+      <div class="statusBar">
+          <label>发布校友互助信息</label>
+      </div>
       <table>
         <thead>
           <tr><td colspan="2">校友帮扶</td></tr>
@@ -14,30 +17,22 @@
             <td><el-input v-model="stuName" placeholder="请输入帮扶人姓名"></el-input></td>
           </tr>
           <tr>
-            <td><label for="">简介：</label></td>
+            <td><label for="">具体事迹：</label></td>
             <td>
               <el-input
                 type="textarea"
-                :rows="6"
-                placeholder="请输入帮扶人简介"
-                v-model="helpInrtoduction">
-              </el-input>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="">事迹</label></td>
-            <td>
-              <el-input
-                type="textarea"
-                :rows="6"
+                :rows="10"
                 placeholder="请输入帮扶人具体事迹"
                 v-model="recruitIntention">
               </el-input>
             </td>
           </tr>
           <tr>
-            <td colspan="2">
+            <td>
               <el-button type="success">提交</el-button>
+            </td>
+            <td>
+              <el-button type="primary">返回</el-button>
             </td>
           </tr>
         </tbody>
@@ -47,12 +42,12 @@
 
 <script>
 import Vheader from '@/components/Vheader.vue'
-import Vslider from '@/components/Vslider.vue'
+import adminVslider from '@/components/adminVslider.vue'
 export default {
   name: 'home',
   components: {
     Vheader,
-    Vslider
+    adminVslider
   },
   data () {
     return {
@@ -66,18 +61,31 @@ export default {
 
 <style lang="scss" scoped>
   .addStuInfo{
-        width:800px;
-        margin: 0 auto;
+        width:1300px;
         padding:10px 0 0 15px;
         margin-left:180px;
         position:relative;
-        margin:0 auto;
+        .statusBar{
+            padding:10px 0 0 0;
+            height:30px;
+            width:100%;
+            border-bottom:1px dashed #d9dfe4;
+            label{
+                border-left:2px solid #2a94de;
+                padding-left:20px;
+                font-size:16px;
+            }
+        }
         table{
-          width:90%;
+          margin-top: 30px;
+          width:55%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);
           border:1px solid #000;
+           label{
+            font-size: 14px;
+          }
         }
         thead{
           td{

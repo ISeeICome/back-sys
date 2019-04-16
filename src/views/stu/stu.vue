@@ -1,19 +1,19 @@
 <template>
     <div class="home">
         <Vheader></Vheader>
-        <Vslider></Vslider>
+        <stuVslider></stuVslider>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
 import Vheader from '@/components/Vheader.vue'
-import Vslider from '@/components/Vslider.vue'
+import stuVslider from '@/components/stuVslider.vue'
 export default {
   name: 'home',
   components: {
     Vheader,
-    Vslider
+    stuVslider
   }
 }
 </script>
