@@ -10,49 +10,24 @@
                     <tr>
                         <td>序号</td>
                         <td>管理员</td>
-                        <td class="setting">操作</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
+                    <tr v-for = "(item,index) in dataList" :key = "index">
+                        <td>{{ getNumber ( index ) }}</td>
+                        <td>{{item.adminName}}</td>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
-                    </tr>
-                     <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
-                    </tr>
-                     <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
-                    </tr>
-                     <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                        </td>
+                      <td colspan="2">
+                        <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page.sync="currentPage"
+                            :page-size="pageSize"
+                            layout="prev, pager, next, jumper"
+                            :total="totalSize">
+                        </el-pagination>
+                      </td>
                     </tr>
                 </tbody>
             </table>
@@ -62,7 +37,59 @@
 
 <script>
 export default {
-  name: 'superAdmin'
+  name: 'superAdmin',
+  data () {
+    return {
+      dataList: '',
+      currentPage: 1,
+      pageSize: 10,
+      totalSize: 0
+    }
+  },
+  methods: {
+    getNumber (index) {
+      return (this.currentPage - 1) * 10 + index
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      this.$axios.post('http://127.0.0.1:3000/getSuperAdminList', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    getSuperAdminList (currentPage) {
+      this.$axios.post('http://127.0.0.1:3000/getSuperAdminList', {
+        params: {
+          page: currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+          console.log(this.totalSize)
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    }
+  },
+  mounted () {
+    this.getSuperAdminList(this.currentPage)
+  }
 }
 </script>
 
@@ -103,7 +130,7 @@ export default {
                 }
                 tbody{
                     td{
-                        padding-left:10px;
+                      padding: 10px;
                     }
                 }
                 td{
@@ -119,6 +146,9 @@ export default {
         }
         .del{
             float:left;
+        }
+        .el-pagination{
+          float:left;
         }
     }
 </style>

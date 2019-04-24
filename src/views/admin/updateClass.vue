@@ -5,10 +5,10 @@
           <tr><td colspan="2">新建班级信息</td></tr>
         </thead>
         <tbody>
-          <!-- <tr>
+          <tr>
             <td><label for="">专业：</label></td>
             <td>
-               <el-select v-model="majorName" placeholder="请选择专业" class="selectMajor">
+               <el-select v-model="majorName" placeholder="请选择" class="selectMajor">
                 <el-option
                   v-for="(item, index) in majorOptions"
                   :key="index"
@@ -17,11 +17,11 @@
                 </el-option>
               </el-select>
             </td>
-          </tr> -->
+          </tr>
           <tr>
             <td><label for="">年级：</label></td>
             <td>
-              <el-select v-model="grade" placeholder="请选择年级" class="selectMajor">
+                <el-select v-model="grade" placeholder="请选择" class="selectMajor">
                 <el-option
                   v-for="(item, index) in gradeOptions"
                   :key="index"
@@ -33,14 +33,14 @@
           </tr>
           <tr>
             <td><label for="">班级名称</label></td>
-            <td><el-input v-model="className" placeholder="请输入班级名称"></el-input></td>
+            <td><el-input v-model="className" placeholder="请输入年级"></el-input></td>
           </tr>
           <tr>
             <td>
               <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="subBtn" @click="addClass">提交</el-button>
+              <el-button type="success" id="subBtn" @click="updateClass">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -57,42 +57,41 @@ export default {
     Vheader,
     adminVslider
   },
+  methods: {
+    goBack () {
+      this.$router.back(-1)
+    },
+    updateClass () {
+      this.$axios.post('http://127.0.0.1:3000/admin/updateClass', {
+        params: {
+          majorName: this.majorName,
+          grade: this.grade,
+          className: this.className,
+          ID: this.ID
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          alert('修改成功')
+          this.goBack()
+        } else {
+          alert('修改失败', result.msg)
+        }
+      })
+    }
+  },
   data () {
     return {
       majorName: '',
       majorOptions: [],
       grade: '',
-      gradeOptions: [],
-      className: ''
-    }
-  },
-  methods: {
-    goBack () {
-      this.$router.back(-1)
-    },
-    addClass () {
-      if ( this.grade === '' || this.className === '') {
-        alert('请将信息输入完整')
-        return
-      }
-      this.$axios.post('http://127.0.0.1:3000/addClass', {
-        params: {
-          // majorName: this.majorName,
-          grade: this.grade,
-          className: this.className
-        }
-      }).then(res => {
-        var result = res.data
-        if (result.code === 1) {
-          alert('添加成功')
-          this.goBack()
-        } else {
-          alert('添加失败', result.msg)
-        }
-      })
+      className: '',
+      ID: '',
+      gradeOptions: []
     }
   },
   mounted () {
+    this.ID = this.$route.params.ID
     var that = this
     var data = new Date()
     var year = data.getFullYear()
@@ -100,6 +99,21 @@ export default {
       this.gradeOptions.push(year)
       year -= 1
     }
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleClass', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        console.log(result)
+        that.majorName = result.data[0].majorName
+        that.grade = result.data[0].grade
+        that.className = result.data[0].className
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
     this.$axios.post('http://127.0.0.1:3000/getMajorList', {
       params: {
         page: 0

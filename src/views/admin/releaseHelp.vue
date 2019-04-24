@@ -17,22 +17,22 @@
             <td><el-input v-model="stuName" placeholder="请输入帮扶人姓名"></el-input></td>
           </tr>
           <tr>
-            <td><label for="">具体事迹：</label></td>
+            <td><label for="">扶贫信息:</label></td>
             <td>
               <el-input
                 type="textarea"
                 :rows="10"
                 placeholder="请输入帮扶人具体事迹"
-                v-model="recruitIntention">
+                v-model="content">
               </el-input>
             </td>
           </tr>
           <tr>
             <td>
-              <el-button type="primary" id="backBtn">返回</el-button>
+              <el-button type="primary" id="backBtn" @click="goBack">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="subBtn">提交</el-button>
+              <el-button type="success" id="subBtn" @click="addExcellentStu">添加</el-button>
             </td>
           </tr>
         </tbody>
@@ -53,7 +53,36 @@ export default {
     return {
       stuName: '',
       stuID: '',
-      helpInrtoduction: ''
+      content: '',
+      date: ''
+    }
+  },
+  methods: {
+    goBack () {
+      this.$router.back(-1)
+    },
+    addExcellentStu () {
+      if (this.stuID === '' || this.stuName === '' || this.content === '') {
+        alert('请将信息输入完整')
+        return
+      }
+      var date = new Date().toLocaleDateString()
+      this.$axios.post('http://127.0.0.1:3000/addHelp', {
+        params: {
+          stuID: this.stuID,
+          stuName: this.stuName,
+          content: this.content,
+          date: date
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          alert('添加成功')
+          this.goBack()
+        } else {
+          alert('添加失败', result.msg)
+        }
+      })
     }
   }
 }

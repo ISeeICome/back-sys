@@ -15,85 +15,115 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>123456</td>
+                    <tr v-for = "(item,index) in dataList" :key = "index">
+                        <td>{{ getNumber ( index +1 ) }}</td>
+                        <td>{{item.adminName}}</td>
+                        <td>{{item.adminPwd}}</td>
                         <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                            <el-button type="danger"  class='setSuper'>设为超级管理员</el-button>
+                            <el-button type="primary" class='update' @click="updateAdmin(item.ID)">修改</el-button>
+                            <el-button type="danger"  class='del' @click="delAdmin(item.ID)">删除</el-button>
                         </td>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>123456</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                            <el-button type="danger"  class='setSuper'>设为超级管理员</el-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>123456</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                            <el-button type="danger"  class='setSuper'>设为超级管理员</el-button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>王强</td>
-                        <td>123456</td>
-                        <td>
-                            <el-button type="primary" class='update'>修改</el-button>
-                            <el-button type="danger"  class='del'>删除</el-button>
-                            <el-button type="danger"  class='setSuper'>设为超级管理员</el-button>
-                        </td>
+                      <td colspan="4">
+                        <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page.sync="currentPage"
+                            :page-size="pageSize"
+                            layout="prev, pager, next, jumper"
+                            :total="totalSize">
+                        </el-pagination>
+                      </td>
                     </tr>
                 </tbody>
             </table>
-            <ol>
-                <li><el-button type="success" id="prevBtn">上一页</el-button></li>
-                <li><el-button type="success" id="nextBtn">下一页</el-button></li>
-            </ol>
             <el-button type="primary"  class='add' @click="toAddCommonAdmin">添加</el-button>
         </div>
-        <!-- <div class="addAdmin">
-            <table>
-                <thead>
-                    <tr class="tableName"><td colspan="4">添加管理员</td></tr>
-                    <tr>
-                        <td>管理员</td>
-                        <td>密码</td>
-                        <td class="setting">操作</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><el-input v-model="uName" placeholder="请输入管理员名称"></el-input></td>
-                        <td><el-input v-model="uName" placeholder="请输入密码"></el-input></td>
-                        <td>
-                            <el-button type="primary" class='add'>添加</el-button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> -->
     </div>
 </template>
 
 <script>
 export default {
   name: 'superAdmin',
+  data () {
+    return {
+      dataList: '',
+      currentPage: 1,
+      pageSize: 10,
+      totalSize: 0
+    }
+  },
   methods: {
     toAddCommonAdmin () {
       this.$router.push({path: '/admin/addAdmin'})
+    },
+    getNumber (index) {
+      return (this.currentPage - 1) * 10 + index
+    },
+    delAdmin (ID) {
+      var adminPower = localStorage.getItem('adminPower')
+      if (parseInt(adminPower) === 0) {
+        alert('权限不足')
+        return
+      }
+      this.$axios.post('http://127.0.0.1:3000/delAdmin', {
+        params: {
+          ID: ID
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          alert('删除成功')
+          this.getCommonAdminList(this.currentPage)
+        } else {
+          alert('删除失败', result.msg)
+        }
+      })
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      this.$axios.post('http://127.0.0.1:3000/getCommonAdminList', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    getCommonAdminList (currentPage) {
+      this.$axios.post('http://127.0.0.1:3000/getCommonAdminList', {
+        params: {
+          page: currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+          console.log(this.totalSize)
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    updateAdmin (ID) {
+      this.$router.push({ path: `/admin/updateAdmin/${ID}` })
     }
+  },
+  mounted () {
+    this.getCommonAdminList(this.currentPage)
   }
 }
 </script>
@@ -142,9 +172,10 @@ export default {
                 }
                 td{
                     border:1px solid #000;
+                    padding: 10px;
                 }
                 .setting{
-                    width:340px;
+                    width:180px;
                 }
             }
         }
@@ -186,6 +217,9 @@ export default {
             td{
                 border:1px solid #666;
             }
+        }
+        .el-pagination{
+          float:left;
         }
     }
     ol{

@@ -18,18 +18,38 @@
             </el-collapse-item>
             <el-collapse-item title="系统工具">
                 <div class='itemWrap'><router-link to="/login" class="item">退出系统</router-link></div>
-                <div class='itemWrap'><router-link to="/admin/updateAdminPwd" class="item">修改密码</router-link></div>
+                <div class='itemWrap'><router-link to="/admin/updateAdminPwd" class="item">修改信息</router-link></div>
             </el-collapse-item>
         </el-collapse>
         <div class="admin">
-            管理员：李伟梁
+            管理员：{{adminName}}
         </div>
     </div>
 </template>
 <script>
 
 export default {
-  name: 'slider'
+  name: 'slider',
+  data () {
+    return {
+      adminName: ''
+    }
+  },
+  mounted () {
+    this.ID = localStorage.getItem('ID')
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleAdmin', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        that.adminName = result.data[0].adminName
+      } else {
+      }
+    })
+  }
 }
 </script>
 

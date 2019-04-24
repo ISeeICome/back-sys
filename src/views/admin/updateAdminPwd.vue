@@ -5,9 +5,9 @@
         </div>
         <div class="box">
             <h2>修改密码</h2>
-            <p><label for="">用户名：</label><el-input v-model="name"></el-input></p>
-            <p><label for="">密&ensp;&ensp;码：</label><el-input v-model="pwd"></el-input></p>
-            <p><el-button type="success">提交</el-button></p>
+            <p><label for="">用户名：</label><el-input v-model="adminName"></el-input></p>
+            <p><label for="">密&ensp;&ensp;码：</label><el-input v-model="adminPwd"></el-input></p>
+            <p><el-button type="success" @click="updateAdmin">提交</el-button></p>
         </div>
     </div>
 </template>
@@ -15,9 +15,46 @@
 export default {
   data () {
     return {
-      name: '',
-      pwd: ''
+      adminName: '',
+      adminPwd: ''
     }
+  },
+  methods: {
+    updateAdmin () {
+      this.$axios.post('http://127.0.0.1:3000/admin/updateAdmin', {
+        params: {
+          adminName: this.adminName,
+          adminPwd: this.adminPwd,
+          adminPower: '1',
+          ID: this.ID
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          alert('修改成功')
+          this.$router.go(0)
+        } else {
+          alert('修改失败', result.msg)
+        }
+      })
+    }
+  },
+  mounted () {
+    var that = this
+    this.ID = localStorage.getItem('ID')
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleAdmin', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        that.adminName = result.data[0].adminName
+        that.adminPwd = result.data[0].adminPwd
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>

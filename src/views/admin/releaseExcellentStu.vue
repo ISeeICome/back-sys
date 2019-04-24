@@ -23,16 +23,16 @@
                 type="textarea"
                 :rows="10"
                 placeholder="请输入校友具体事迹"
-                v-model="recruitIntention">
+                v-model="content">
               </el-input>
             </td>
           </tr>
           <tr>
             <td>
-              <el-button type="primary">返回</el-button>
+              <el-button type="primary" @click="goBack">返回</el-button>
             </td>
             <td>
-              <el-button type="success">提交</el-button>
+              <el-button type="success" @click="addExcellentStu" id="addBtn">添加</el-button>
             </td>
           </tr>
         </tbody>
@@ -53,7 +53,35 @@ export default {
     return {
       stuName: '',
       stuID: '',
-      helpInrtoduction: ''
+      content: ''
+    }
+  },
+  methods: {
+    goBack () {
+      this.$router.back(-1)
+    },
+    addExcellentStu () {
+      if (this.stuID === '' || this.stuName === '' || this.content === '') {
+        alert('请将信息输入完整')
+        return
+      }
+      var date = new Date().toLocaleDateString()
+      this.$axios.post('http://127.0.0.1:3000/addExcellentStu', {
+        params: {
+          stuID: this.stuID,
+          stuName: this.stuName,
+          content: this.content,
+          date: date
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          alert('添加成功')
+          this.goBack()
+        } else {
+          alert('添加失败', result.msg)
+        }
+      })
     }
   }
 }
@@ -105,7 +133,7 @@ export default {
             }
           }
         }
-        #subBtn{
+        #addBtn{
           float:right;
           margin-right:50px;
         }

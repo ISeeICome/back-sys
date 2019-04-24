@@ -15,6 +15,7 @@ import superAdmin from '@/views/admin/superAdmin'
 import commonAdmin from '@/views/admin/commonAdmin'
 import addAdmin from '@/views/admin/addAdmin'
 import classManage from '@/views/admin/classManage'
+import updateClass from '@/views/admin/updateClass'
 import releaseRecruit from '@/views/admin/releaseRecruit'
 import releaseHelp from '@/views/admin/releaseHelp'
 import releaseExcellentStu from '@/views/admin/releaseExcellentStu'
@@ -22,6 +23,12 @@ import excellentStuManage from '@/views/admin/excellentStuManage'
 import recruitManage from '@/views/admin/recruitManage'
 import helpManage from '@/views/admin/helpManage'
 import updateAdminPwd from '@/views/admin/updateAdminPwd'
+import updateAdmin from '@/views/admin/updateAdmin'
+import updateMajor from '@/views/admin/updateMajor'
+import updateStu from '@/views/admin/updateStu'
+import updateExcellentStu from '@/views/admin/updateExcellentstu'
+import updateHelp from '@/views/admin/updateHelp'
+import updateRecruit from '@/views/admin/updateRecruit'
 
 import personInfo from '@/views/stu/personInfo'
 import excellentStu from '@/views/stu/excellentStu'
@@ -56,6 +63,21 @@ export default new Router({
           component: excellentStuManage
         },
         {
+          path: 'updateExcellentStu/:ID',
+          name: 'updateExcellentStu',
+          component: updateExcellentStu
+        },
+        {
+          path: 'updateHelp/:ID',
+          name: 'updateHelp',
+          component: updateHelp
+        },
+        {
+          path: 'updateRecruit/:ID',
+          name: 'updateRecruit',
+          component: updateRecruit
+        },
+        {
           path: 'recruitManage',
           name: 'recruitManage',
           component: recruitManage
@@ -86,6 +108,16 @@ export default new Router({
           component: majorManage
         },
         {
+          path: 'updateMajor/:ID',
+          name: 'updateMajor',
+          component: updateMajor
+        },
+        {
+          path: 'updateStu/:ID',
+          name: 'updateStu',
+          component: updateStu
+        },
+        {
           path: 'addMajor',
           name: 'addMajor',
           component: addMajor
@@ -94,6 +126,11 @@ export default new Router({
           path: 'classManage',
           name: 'classManage',
           component: classManage
+        },
+        {
+          path: 'updateClass/:ID',
+          name: 'updateClass',
+          component: updateClass
         },
         {
           path: 'addClass',
@@ -134,6 +171,11 @@ export default new Router({
           path: 'updateAdminPwd',
           name: 'updateAdminPwd',
           component: updateAdminPwd
+        },
+        {
+          path: 'updateAdmin/:id',
+          name: 'updateAdmin',
+          component: updateAdmin
         }
       ]
     },

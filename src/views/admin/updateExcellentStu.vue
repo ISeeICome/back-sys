@@ -1,37 +1,38 @@
 <template>
-    <div class="recruitInfo">
+    <div class="releaseExcellentStu">
       <div class="statusBar">
-          <label>发布招聘信息</label>
+          <label>发布杰出校友信息</label>
       </div>
       <table>
         <thead>
-          <tr><td colspan="2">校友招聘</td></tr>
+          <tr><td colspan="2">杰出校友</td></tr>
         </thead>
         <tbody>
           <tr>
-            <td><label for="">招聘方：</label></td>
-            <td><el-input v-model="recruitName" placeholder="请输入招聘方名称"></el-input></td>
+            <td><label for="">校友学号：</label></td>
+            <td><el-input v-model="stuID" placeholder="请输入校友学号"></el-input></td>
           </tr>
           <tr>
-            <td><label for="">招聘意向：</label></td>
+            <td><label for="">校友姓名：</label></td>
+            <td><el-input v-model="stuName" placeholder="请输入校友姓名"></el-input></td>
+          </tr>
+          <tr>
+            <td><label for="">具体事迹</label></td>
             <td>
               <el-input
                 type="textarea"
-                :rows="11"
-                placeholder="请输入招聘意向"
+                :rows="10"
+                placeholder="请输入校友具体事迹"
                 v-model="content">
-              </el-input></td>
-          </tr>
-          <tr>
-            <td><label for="">工作地址：</label></td>
-            <td><el-input v-model="workAddress" placeholder="请输入工作地址"></el-input></td>
+              </el-input>
+            </td>
           </tr>
           <tr>
             <td>
-              <el-button type="primary" @click="goBack">返回</el-button>
+              <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="addBtn"  @click="addRecruit">添加</el-button>
+              <el-button type="success" @click="updateExcellentStu">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -50,44 +51,59 @@ export default {
   },
   data () {
     return {
-      recruitName: '',
-      content: '',
-      workAddress: ''
+      ID: '',
+      stuName: '',
+      stuID: '',
+      content: ''
     }
   },
   methods: {
     goBack () {
       this.$router.back(-1)
     },
-    addRecruit () {
-      if (this.recruitName === '' || this.workAddress === '' || this.content === '') {
-        alert('请将信息输入完整')
-        return
-      }
-      var date = new Date().toLocaleDateString()
-      this.$axios.post('http://127.0.0.1:3000/addRecruit', {
+    updateExcellentStu () {
+      this.$axios.post('http://127.0.0.1:3000/admin/updateExcellentStu', {
         params: {
-          recruitName: this.recruitName,
+          stuName: this.stuName,
+          stuID: this.stuID,
           content: this.content,
-          workAddress: this.workAddress,
-          date: date
+          ID: this.ID
         }
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
-          alert('添加成功')
+          alert('修改成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert('修改失败', result.msg)
         }
       })
     }
+  },
+  mounted () {
+    this.ID = this.$route.params.ID
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleExcellentStu', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        console.log(result)
+        that.stuID = result.data[0].stuID
+        that.stuName = result.data[0].stuName
+        that.content = result.data[0].content
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .recruitInfo{
+  .releaseExcellentStu{
         width:1300px;
         padding:10px 0 0 15px;
         margin-left:180px;
@@ -104,12 +120,15 @@ export default {
             }
         }
         table{
-          margin-top:30px;
+          margin-top: 30px;
           width:55%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);
           border:1px solid #000;
+          label{
+            font-size: 14px;
+          }
         }
         thead{
           td{
@@ -124,18 +143,12 @@ export default {
           td:nth-child(2n+1){
             padding-left:50px;
             width:100px;
-            font-size: 14px;
             input{
               display: block;
             }
           }
         }
-        .el-button--success{
-          float:right;
-          margin-right:60px;
-          margin-top:20px;
-        }
-        #addBtn{
+        #subBtn{
           float:right;
           margin-right:50px;
         }

@@ -74,7 +74,7 @@
               <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="subBtn" @click="addStu">提交</el-button>
+              <el-button type="success" id="subBtn" @click = "updateStu">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -106,13 +106,11 @@ export default {
       }
       console.log(this.classOptions)
     },
-    addStu () {
-      if (this.stuID === '' || this.stuName === '' || this.majorName === '' || this.grade === '' || this.className === '') {
-        alert('学号、姓名、年级、专业、班级为必填项，请输入完整')
-        return
-      }
-      this.$axios.post('http://127.0.0.1:3000/addStu', {
+    updateStu () {
+      console.log(this.majorName)
+      this.$axios.post('http://127.0.0.1:3000/admin/updateStu', {
         params: {
+          ID: this.ID,
           stuID: this.stuID,
           stuName: this.stuName,
           stuPwd: '123456',
@@ -127,10 +125,10 @@ export default {
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
-          alert('添加成功')
+          alert('修改成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert('修改失败', result.msg)
         }
       })
     }
@@ -138,6 +136,7 @@ export default {
   data () {
     return {
       stuID: '',
+      ID: '',
       stuName: '',
       majorName: '',
       company: '',
@@ -153,6 +152,7 @@ export default {
     }
   },
   mounted () {
+    this.ID = this.$route.params.ID
     var that = this
     var data = new Date()
     var year = data.getFullYear()
@@ -174,15 +174,26 @@ export default {
       } else {
       }
     })
-    this.$axios.post('http://127.0.0.1:3000/getClassList', {
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleStu', {
       params: {
-        page: 0
+        ID: this.ID
       }
     }).then(res => {
       var result = res.data
       console.log(result)
       if (result.code === 1) {
-        that.classList = result.data
+        that.ID = result.data[0].ID
+        that.stuID = result.data[0].stuID
+        that.stuName = result.data[0].stuName
+        that.majorName = result.data[0].majorName
+        that.grade = result.data[0].grade
+        that.className = result.data[0].className
+        that.tel = result.data[0].tel
+        that.company = result.data[0].company
+        that.workCity = result.data[0].workCity
+        that.fromCity = result.data[0].fromCity
+      } else {
+        alert('查询失败', result.msg)
       }
     })
   }

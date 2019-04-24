@@ -2,7 +2,7 @@
     <div class="addStuInfo">
       <table>
         <thead>
-          <tr><td colspan="2">新建专业信息</td></tr>
+          <tr><td colspan="2">修改专业信息</td></tr>
         </thead>
         <tbody>
           <tr>
@@ -14,7 +14,7 @@
               <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="subBtn" @click="addMajor">提交</el-button>
+              <el-button type="success" id="subBtn" @click="updateMajor">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -35,30 +35,48 @@ export default {
     goBack () {
       this.$router.back(-1)
     },
-    addMajor () {
-      if (this.majorName === '') {
-        alert('请输入专业名称')
-        return
-      }
-      this.$axios.post('http://127.0.0.1:3000/addMajor', {
+    updateMajor () {
+      console.log(this.majorName)
+      this.$axios.post('http://127.0.0.1:3000/admin/updateMajor', {
         params: {
-          majorName: this.majorName
+          majorName: this.majorName,
+          ID: this.ID
         }
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
-          alert('添加成功')
+          alert('修改成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert('修改失败', result.msg)
         }
       })
     }
   },
   data () {
     return {
-      majorName: ''
+      majorName: '',
+      ID: ''
     }
+  },
+  mounted () {
+    this.ID = this.$route.params.ID
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleMajor', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        console.log(result)
+        that.majorName = result.data[0].majorName
+        console.log(that.majorName)
+        console.log(result)
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>

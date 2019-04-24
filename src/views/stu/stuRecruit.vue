@@ -1,55 +1,117 @@
 <template>
-    <div class="stuRecruit">
+    <div class="recruitManage">
         <div class="statusBar">
             <label>招聘信息列表</label>
         </div>
         <div class="content">
             <ul>
-                <li>
-                    <h2>中美国际--李森</h2>
+                <li v-for = "(item,index) in dataList" :key = "index">
+                    <h2>
+                        招聘方：{{item.recruitName}}
+                        <div class="releaseTime">发布时间：{{item.date}}</div>
+                    </h2>
                     <div>
                         <label>招聘意向：</label>
-                        <p>1. 3年以上开发经验，计算机相关专业大专及以上学历，良好的编程习惯；2. 精通前端基本技术，包括HTML /CSS /Javascript /jQuery /Bootstrap 等；
-                            3. 熟练掌握至少一种常用前端框架，如React、AngularJs、Vue等；4. 有Reac native实际开发经验优先考虑；5. 具备较强解决问题的能力，有良好的沟通能力和团队精神。
-                        </p>
-    ·               </div>
-                    <div><label>工作单位：</label>北京中美国际贸易公司</div>
-                </li>
-                 <li>
-                    <h2>中美国际--李森</h2>
-                    <div>
-                        <label>招聘意向：</label>
-                        <p>1. 3年以上开发经验，计算机相关专业大专及以上学历，良好的编程习惯；2. 精通前端基本技术，包括HTML /CSS /Javascript /jQuery /Bootstrap 等；
-                            3. 熟练掌握至少一种常用前端框架，如React、AngularJs、Vue等；4. 有Reac native实际开发经验优先考虑；5. 具备较强解决问题的能力，有良好的沟通能力和团队精神。
-                        </p>
-    ·               </div>
-                    <div><label>工作单位：</label>北京中美国际贸易公司</div>
-                </li>
-                <li>
-                    <h2>中美国际--李森</h2>
-                    <div>
-                        <label>招聘意向：</label>
-                        <p>1. 3年以上开发经验，计算机相关专业大专及以上学历，良好的编程习惯；2. 精通前端基本技术，包括HTML /CSS /Javascript /jQuery /Bootstrap 等；
-                            3. 熟练掌握至少一种常用前端框架，如React、AngularJs、Vue等；4. 有Reac native实际开发经验优先考虑；5. 具备较强解决问题的能力，有良好的沟通能力和团队精神。
-                        </p>
-    ·               </div>
-                    <div><label>工作单位：</label>北京中美国际贸易公司</div>
+                        <p class="detail">{{changeDetail(item.content)}}</p>
+                    </div>
+                    <div class="workAdd"><span>工作地址：</span>{{item.workAddress}} </div>
                 </li>
             </ul>
-             <ol>
-                <li><el-button type="success" id="prevBtn">上一页</el-button></li>
-                <li><el-button type="success" id="nextBtn">下一页</el-button></li>
-            </ol>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-size="pageSize"
+                layout="prev, pager, next, jumper"
+                :total="totalSize">
+            </el-pagination>
+            <el-button type="primary"  class='add' @click = "toAddRecruit">添加</el-button>
         </div>
     </div>
 </template>
 <script>
 export default {
-
+  data () {
+    return {
+      dataList: '',
+      currentPage: 1,
+      pageSize: 3,
+      totalSize: 0
+    }
+  },
+  methods: {
+    changeDetail (str) {
+      return str.replace('/n', '<br/>')
+    },
+    toAddRecruit () {
+      this.$router.push({path: '/admin/releaseRecruit'})
+    },
+    getNumber (index) {
+      return (this.currentPage - 1) * 10 + index
+    },
+    delRecruit (ID) {
+      this.$axios.post('http://127.0.0.1:3000/delRecruit', {
+        params: {
+          ID: ID
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          alert('删除成功')
+          this.getRecruit(this.currentPage)
+        } else {
+          alert('删除失败', result.msg)
+        }
+      })
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      this.$axios.post('http://127.0.0.1:3000/getRecruitList', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    getRecruit (currentPage) {
+      this.$axios.post('http://127.0.0.1:3000/getRecruitList', {
+        params: {
+          page: currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+          console.log(this.totalSize)
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    updateRecruit (ID) {
+      this.$router.push({ path: `/admin/updateRecruit/${ID}` })
+    }
+  },
+  mounted () {
+    this.getRecruit(this.currentPage)
+  }
 }
 </script>
 <style lang="scss" scoped>
-.stuRecruit{
+.recruitManage{
         width:1250px;
         margin: 0 auto;
         padding:10px 0 0 15px;
@@ -67,28 +129,59 @@ export default {
         }
     }
     ul{
+        color: #888888;
         li{
+          position: relative;
             h2{
+                color: #444;
                 font-weight: 600;
-                font-size: 20px;
+                font-size: 18px;
                 margin-bottom:10px;
+                .delete,.update,.releaseTime{
+                    float:right;
+                    margin-right:10px;
+                }
+                .releaseTime{
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height:36px;
+                }
             }
             label{
-                color:#000;
-                font-weight:700;
+              color: #555;
+              font-weight: 700;
+              line-height: 30px;
+            }
+            span{
+               color:#555;
+            }
+            .detail{
+              font-size: 14px;
+              text-indent: 2em;
             }
             height:140px;
             padding:10px 0 10px 20px;
-            border-bottom:1px solid #333;
+            border-bottom:1px solid #999;
             text-align: justify;
+            .workAdd{
+              position: absolute;
+              bottom:0px;
+              line-height:30px;
+              font-size: 14px;
+            }
         }
     }
     ol{
-        float:right;
+        float:left;
+        margin-left:50px;
         li{
             float:left;
             margin:0 10px;
         }
+    }
+    .add{
+        float:right;
+        margin:15px 20px 0 0;;
     }
 }
 </style>

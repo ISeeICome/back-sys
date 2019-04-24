@@ -1,7 +1,7 @@
 <template>
     <div class="recruitInfo">
       <div class="statusBar">
-          <label>发布招聘信息</label>
+          <label>修改招聘信息</label>
       </div>
       <table>
         <thead>
@@ -9,8 +9,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">招聘方：</label></td>
-            <td><el-input v-model="recruitName" placeholder="请输入招聘方名称"></el-input></td>
+            <td><label for="">招聘人：</label></td>
+            <td><el-input v-model="recruitName" placeholder="请输入招聘人姓名"></el-input></td>
           </tr>
           <tr>
             <td><label for="">招聘意向：</label></td>
@@ -23,7 +23,7 @@
               </el-input></td>
           </tr>
           <tr>
-            <td><label for="">工作地址：</label></td>
+            <td><label for="">工作单位：</label></td>
             <td><el-input v-model="workAddress" placeholder="请输入工作地址"></el-input></td>
           </tr>
           <tr>
@@ -31,7 +31,7 @@
               <el-button type="primary" @click="goBack">返回</el-button>
             </td>
             <td>
-              <el-button type="success" id="addBtn"  @click="addRecruit">添加</el-button>
+              <el-button type="success" id="addBtn"  @click="updateRecruit">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -50,6 +50,7 @@ export default {
   },
   data () {
     return {
+      ID: '',
       recruitName: '',
       content: '',
       workAddress: ''
@@ -59,29 +60,44 @@ export default {
     goBack () {
       this.$router.back(-1)
     },
-    addRecruit () {
-      if (this.recruitName === '' || this.workAddress === '' || this.content === '') {
-        alert('请将信息输入完整')
-        return
-      }
-      var date = new Date().toLocaleDateString()
-      this.$axios.post('http://127.0.0.1:3000/addRecruit', {
+    updateRecruit () {
+      this.$axios.post('http://127.0.0.1:3000/admin/updateRecruit', {
         params: {
           recruitName: this.recruitName,
-          content: this.content,
           workAddress: this.workAddress,
-          date: date
+          content: this.content,
+          ID: this.ID
         }
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
-          alert('添加成功')
+          alert('修改成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert('修改失败', result.msg)
         }
       })
     }
+  },
+  mounted () {
+    this.ID = this.$route.params.ID
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleRecruit', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        console.log(result)
+        that.recruitName = result.data[0].recruitName
+        that.workAddress = result.data[0].workAddress
+        that.content = result.data[0].content
+        that.date = result.data[0].date
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>

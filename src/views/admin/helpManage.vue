@@ -5,33 +5,110 @@
         </div>
         <div class="content">
             <ul>
-                <li>
-                    <h2>白血病--李森<el-button type="danger"  class='delete'>删除</el-button></h2>
-                    <p><label>主要事迹</label>：白血病晚期。</p>
-                </li>
-                <li>
-                    <h2>白血病--李森<el-button type="danger"  class='delete'>删除</el-button></h2>
-                    <p><label>主要事迹</label>：白血病晚期。</p>
-                </li>
-                <li>
-                    <h2>白血病--李森<el-button type="danger"  class='delete'>删除</el-button></h2>
-                    <p><label>主要事迹</label>：白血病晚期。</p>
+                <li v-for = "(item,index) in dataList" :key = "index">
+                    <h2>{{item.stuName}}
+                        <el-button type="danger"  class='delete' @click="delHelp(item.ID)">删除</el-button>
+                        <el-button type="danger"  class='update' @click="updateHelp(item.ID)">修改</el-button>
+                        <div class="releaseTime">发布时间：{{item.date}}</div>
+                    </h2>
+                    <div>
+                        <label>扶贫信息</label>
+                        <div class="detail">{{item.content}}</div>
+                    </div>
                 </li>
             </ul>
-            <ol>
-                <li><el-button type="success" id="prevBtn">上一页</el-button></li>
-                <li><el-button type="success" id="nextBtn">下一页</el-button></li>
-            </ol>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="currentPage"
+                :page-size="pageSize"
+                layout="prev, pager, next, jumper"
+                :total="totalSize">
+            </el-pagination>
             <el-button type="primary"  class='add' @click = "toAddHelp">添加</el-button>
         </div>
     </div>
 </template>
 <script>
 export default {
+  data () {
+    return {
+      dataList: '',
+      currentPage: 1,
+      pageSize: 3,
+      totalSize: 0
+    }
+  },
   methods: {
     toAddHelp () {
       this.$router.push({path: '/admin/releaseHelp'})
+    },
+    getNumber (index) {
+      return (this.currentPage - 1) * 10 + index
+    },
+    delHelp (ID) {
+      var adminPower = localStorage.getItem('adminPower')
+      if (parseInt(adminPower) === 0) {
+        alert('权限不足')
+        return
+      }
+      this.$axios.post('http://127.0.0.1:3000/delHelp', {
+        params: {
+          ID: ID
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          alert('删除成功')
+          this.getHelpList(this.currentPage)
+        } else {
+          alert('删除失败', result.msg)
+        }
+      })
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      this.$axios.post('http://127.0.0.1:3000/getHelpList', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    getHelpList (currentPage) {
+      this.$axios.post('http://127.0.0.1:3000/getHelpList', {
+        params: {
+          page: currentPage
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.dataList = result.data
+          this.totalSize = result.totalSize
+          console.log(this.totalSize)
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
+    updateHelp (ID) {
+      this.$router.push({ path: `/admin/updateHelp/${ID}` })
     }
+  },
+  mounted () {
+    this.getHelpList(this.currentPage)
   }
 }
 </script>
@@ -54,24 +131,35 @@ export default {
         }
     }
     ul{
+        color: #888888;
         li{
             h2{
+                color: #444;
                 font-weight: 600;
-                font-size: 20px;
+                font-size: 18px;
                 margin-bottom:10px;
-                .delete{
+                .delete,.update,.releaseTime{
                     float:right;
                     margin-right:10px;
                 }
+                .releaseTime{
+                    font-size: 16px;
+                    line-height:36px;
+                    font-weight: 400;
+                }
             }
             label{
-                color:#000;
+                color: #555;
                 font-weight:700;
             }
             height:140px;
             padding:10px 0 10px 20px;
-            border-bottom:1px solid #333;
+            border-bottom:1px solid #999;
             text-align: justify;
+            .detail{
+              font-size: 14px;
+              text-indent: 2em;
+            }
         }
     }
     ol{

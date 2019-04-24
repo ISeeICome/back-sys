@@ -5,13 +5,18 @@ import App from './App'
 import router from './router'
 import '@/assets/css/basic.css'
 import '@/assets/css/font-awesome.min.css'
-import {Collapse, CollapseItem, Button, Input, Select} from 'element-ui'
+import {Collapse, CollapseItem, Button, Input, Select, Pagination, Option, DatePicker} from 'element-ui'
+import axios from 'axios'
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Button)
 Vue.use(Input)
 Vue.use(Select)
+Vue.use(Pagination)
+Vue.use(Option)
+Vue.use(DatePicker)
 
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

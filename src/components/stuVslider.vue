@@ -15,14 +15,35 @@
             </el-collapse-item>
         </el-collapse>
         <div class="admin">
-            用户：李青
+            用户：{{stuName}}
         </div>
     </div>
 </template>
 <script>
 
 export default {
-  name: 'slider'
+  name: 'slider',
+  data () {
+    return {
+      stuName: ''
+    }
+  },
+  mounted () {
+    this.ID = localStorage.getItem('ID')
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        that.stuName = result.data[0].stuName
+        console.log(that.stuName)
+      } else {
+      }
+    })
+  }
 }
 </script>
 

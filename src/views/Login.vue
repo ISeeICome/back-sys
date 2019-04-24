@@ -45,10 +45,39 @@ export default {
   },
   methods: {
     loginStuFn () {
-      this.$router.push({path: '/stu/personInfo'})
+      this.$axios.post('http://127.0.0.1:3000/stu/login', {
+        params: {
+          stuID: this.loginName,
+          stunPwd: this.loginPwd
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          var localstorage = window.localStorage
+          localstorage.setItem('ID', result.data[0].ID)
+          this.$router.push({path: '/stu/personInfo'})
+        } else {
+          alert('登录失败', result.msg)
+        }
+      })
     },
     loginAdminFn () {
-      this.$router.push({path: '/admin/showBiogenicDis'})
+      this.$axios.post('http://127.0.0.1:3000/admin/login', {
+        params: {
+          username: this.loginName,
+          password: this.loginPwd
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.code === 1) {
+          var localStorage = window.localStorage
+          localStorage.setItem('ID', result.data[0].ID)
+          localStorage.setItem('adminPower', result.data[0].adminPower)
+          this.$router.push({path: '/admin/showBiogenicDis'})
+        } else {
+          alert('登录失败', result.msg)
+        }
+      })
     }
   },
   mounted () {

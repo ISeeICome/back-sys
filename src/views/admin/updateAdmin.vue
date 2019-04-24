@@ -1,11 +1,11 @@
 <template>
-    <div class="addAdmin">
+    <div class="updateAdmin">
         <div class="statusBar">
-            <label>添加管理员</label>
+            <label>修改管理员</label>
         </div>
         <table>
             <thead>
-                <tr class="tableName"><td colspan="2">添加管理员</td></tr>
+                <tr class="tableName"><td colspan="2">修改管理员信息</td></tr>
             </thead>
             <tbody>
                 <tr>
@@ -17,11 +17,24 @@
                     <td><el-input v-model="adminPwd" placeholder="请输入密码"></el-input></td>
                 </tr>
                 <tr>
+                    <td>权限</td>
+                    <td>
+                        <el-select v-model="adminPower" placeholder="请选择" class="selectPower">
+                        <el-option
+                            v-for="(item, index) in powerOptions"
+                            :key="index"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                        </el-select>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
                     </td>
                     <td>
-                        <el-button type="primary" class='add' @click="addCommonAdmin">添加</el-button>
+                        <el-button type="primary" class='add' @click="updateAdmin">修改</el-button>
                     </td>
                 </tr>
             </tbody>
@@ -35,35 +48,61 @@ export default {
   data () {
     return {
       adminPwd: '',
-      adminName: ''
+      adminName: '',
+      ID: '11',
+      adminPower: '0',
+      powerOptions: [
+        {label: '普通管理员', value: '0'},
+        {label: '超级管理员', value: '1'}
+      ]
     }
   },
   methods: {
     goBack () {
       this.$router.back(-1)
     },
-    addCommonAdmin () {
-      this.$axios.post('http://127.0.0.1:3000/addAdmin', {
+    updateAdmin () {
+      this.$axios.post('http://127.0.0.1:3000/admin/updateAdmin', {
         params: {
           adminName: this.adminName,
-          adminPwd: this.adminPwd
+          adminPwd: this.adminPwd,
+          adminPower: this.adminPower,
+          ID: this.ID
         }
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
-          alert('添加成功')
+          alert('修改成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert('修改失败', result.msg)
         }
       })
     }
+  },
+  mounted () {
+    this.ID = this.$route.params.id
+    console.log(this.$route.params)
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/admin/getSingleAdmin', {
+      params: {
+        ID: this.ID
+      }
+    }).then(res => {
+      var result = res.data
+      if (result.code === 1) {
+        that.adminName = result.data[0].adminName
+        that.adminPwd = result.data[0].adminPwd
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-    .addAdmin{
+    .updateAdmin{
         padding:10px 0 0 15px;
         margin-left:180px;
         .statusBar{
@@ -103,6 +142,14 @@ export default {
         }
         td{
             // border:1px solid #666;
+            .add{
+              float:right;
+              margin-right:6px;
+            }
         }
+        .selectPower{
+          width:100%;
+        }
+
     }
 </style>
