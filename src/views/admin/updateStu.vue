@@ -2,7 +2,7 @@
     <div class="addStuInfo">
       <table>
         <thead>
-          <tr><td colspan="2">新建校友信息</td></tr>
+          <tr><td colspan="2">修改校友信息</td></tr>
         </thead>
         <tbody>
           <tr>
@@ -12,45 +12,6 @@
           <tr>
             <td><label for="">姓名：</label></td>
             <td><el-input v-model="stuName" placeholder="请输入姓名"></el-input></td>
-          </tr>
-          <tr>
-            <td><label for="">年级</label></td>
-            <td>
-                <el-select v-model="grade" placeholder="请选择" class="selectGrade" @change="getClassList">
-                <el-option
-                  v-for="(item, index) in gradeOptions"
-                  :key="index"
-                  :label="item"
-                  :value="item">
-                </el-option>
-              </el-select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="">专业：</label></td>
-            <td>
-               <el-select v-model="majorName" placeholder="请选择" class="selectMajor" @change="getClassList">
-                <el-option
-                  v-for="(item, index) in majorOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="">班级</label></td>
-            <td>
-               <el-select v-model="className" placeholder="请选择" class="selectClass">
-                <el-option
-                  v-for="(item, index) in classOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
           </tr>
           <tr>
             <td><label for="">联系电话：</label></td>
@@ -68,7 +29,19 @@
             <td><label for="">生源地：</label></td>
             <td><el-input v-model="fromCity" placeholder="请输入内容"></el-input></td>
           </tr>
-
+          <tr>
+            <td><label for="">权限：</label></td>
+            <td>
+              <el-select v-model="isClassAdmin" placeholder="请选择" class="selectClass">
+                <el-option
+                  v-for="(item, index) in classAdminOptions"
+                  :key="index"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </td>
+          </tr>
           <tr>
             <td>
               <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
@@ -98,7 +71,7 @@ export default {
     getClassList () {
       this.classOptions = []
       for (const key in this.classList) {
-        if (this.classList[key].grade === this.grade.toString() && this.classList[key].majorName === this.majorName) {
+        if (this.classList[key].grade === this.grade.toString()) {
           console.log(111)
           var object = {value: this.classList[key].className, label: this.classList[key].className}
           this.classOptions.push(object)
@@ -107,7 +80,6 @@ export default {
       console.log(this.classOptions)
     },
     updateStu () {
-      console.log(this.majorName)
       this.$axios.post('http://127.0.0.1:3000/admin/updateStu', {
         params: {
           ID: this.ID,
@@ -115,12 +87,12 @@ export default {
           stuName: this.stuName,
           stuPwd: '123456',
           grade: this.grade,
-          majorName: this.majorName,
           className: this.className,
           tel: this.tel,
           company: this.company,
           workCity: this.workCity,
-          fromCity: this.fromCity
+          fromCity: this.fromCity,
+          isClassAdmin: this.isClassAdmin
         }
       }).then(res => {
         var result = res.data
@@ -138,7 +110,6 @@ export default {
       stuID: '',
       ID: '',
       stuName: '',
-      majorName: '',
       company: '',
       workCity: '',
       fromCity: '',
@@ -148,7 +119,12 @@ export default {
       classList: [],
       gradeOptions: [],
       majorOptions: [],
-      classOptions: []
+      classOptions: [],
+      isClassAdmin: '',
+      classAdminOptions: [
+        {label: '班级管理员', value: 1},
+        {label: '无', value: 2}
+      ]
     }
   },
   mounted () {
@@ -160,21 +136,7 @@ export default {
       this.gradeOptions.push(year)
       year -= 1
     }
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
-      params: {
-        page: 0
-      }
-    }).then(res => {
-      var result = res.data
-      if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
-      }
-    })
-    this.$axios.post('http://127.0.0.1:3000/admin/getSingleStu', {
+    this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
       params: {
         ID: this.ID
       }
@@ -185,13 +147,15 @@ export default {
         that.ID = result.data[0].ID
         that.stuID = result.data[0].stuID
         that.stuName = result.data[0].stuName
-        that.majorName = result.data[0].majorName
         that.grade = result.data[0].grade
         that.className = result.data[0].className
         that.tel = result.data[0].tel
         that.company = result.data[0].company
         that.workCity = result.data[0].workCity
         that.fromCity = result.data[0].fromCity
+        if (result.data[0].isClassAdmin === 1) { that.isClassAdmin = '班级管理员' } else {
+          that.isClassAdmin = '无'
+        }
       } else {
         alert('查询失败', result.msg)
       }

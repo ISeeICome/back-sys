@@ -5,8 +5,12 @@ import App from './App'
 import router from './router'
 import '@/assets/css/basic.css'
 import '@/assets/css/font-awesome.min.css'
-import {Collapse, CollapseItem, Button, Input, Select, Pagination, Option, DatePicker} from 'element-ui'
+import {Collapse, CollapseItem, Button, Input, Select, Pagination, Option, DatePicker, Submenu, MenuItem} from 'element-ui'
 import axios from 'axios'
+
+// import Blob from './excel/Blob'
+// import Export2Excel from './excel/Export2Excel.js'
+
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Button)
@@ -15,6 +19,8 @@ Vue.use(Select)
 Vue.use(Pagination)
 Vue.use(Option)
 Vue.use(DatePicker)
+Vue.use(Submenu)
+Vue.use(MenuItem)
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

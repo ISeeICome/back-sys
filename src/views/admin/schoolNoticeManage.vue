@@ -7,16 +7,15 @@
             <ul>
                 <li v-for = "(item,index) in dataList" :key = "index">
                     <h2>
-                        招聘方：{{item.recruitName}}
-                        <el-button type="danger"  class='delete' @click="delRecruit(item.ID)">删除</el-button>
-                        <el-button type="danger"  class='update' @click="updateRecruit(item.ID)">修改</el-button>
+                        公告标题{{item.title}}
+                        <el-button type="danger"  class='delete' @click="delSchoolNotice(item.ID)">删除</el-button>
+                        <el-button type="danger"  class='update' @click="updateSchoolNotice(item.ID)">修改</el-button>
                         <div class="releaseTime">发布时间：{{item.date}}</div>
                     </h2>
                     <div>
-                        <label>招聘意向：</label>
+                        <label>内容：</label>
                         <p class="detail">{{changeDetail(item.content)}}</p>
                     </div>
-                    <div class="workAdd"><span>工作地址：</span>{{item.workAddress}} </div>
                 </li>
             </ul>
             <el-pagination
@@ -27,7 +26,7 @@
                 layout="prev, pager, next, jumper"
                 :total="totalSize">
             </el-pagination>
-            <el-button type="primary"  class='add' @click = "toAddRecruit">添加</el-button>
+            <el-button type="primary"  class='add' @click = "toAddSchoolNotice">添加</el-button>
         </div>
     </div>
 </template>
@@ -45,19 +44,19 @@ export default {
     changeDetail (str) {
       return str.replace('/n', '<br/>')
     },
-    toAddRecruit () {
-      this.$router.push({path: '/admin/releaseRecruit'})
+    toAddSchoolNotice () {
+      this.$router.push({path: '/admin/addSchoolNotice'})
     },
     getNumber (index) {
       return (this.currentPage - 1) * 10 + index
     },
-    delRecruit (ID) {
+    delSchoolNotice (ID) {
       var adminPower = localStorage.getItem('adminPower')
       if (parseInt(adminPower) === 0) {
         alert('权限不足')
         return
       }
-      this.$axios.post('http://127.0.0.1:3000/delRecruit', {
+      this.$axios.post('http://127.0.0.1:3000/delSchoolNotice', {
         params: {
           ID: ID
         }
@@ -66,7 +65,7 @@ export default {
         console.log(result)
         if (result.code === 1) {
           alert('删除成功')
-          this.getRecruit(this.currentPage)
+          this.getSchoolNotice(this.currentPage)
         } else {
           alert('删除失败', result.msg)
         }
@@ -76,7 +75,7 @@ export default {
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
-      this.$axios.post('http://127.0.0.1:3000/getRecruitList', {
+      this.$axios.post('http://127.0.0.1:3000/getSchoolNoticeList', {
         params: {
           page: this.currentPage
         }
@@ -91,8 +90,8 @@ export default {
         }
       })
     },
-    getRecruit (currentPage) {
-      this.$axios.post('http://127.0.0.1:3000/getRecruitList', {
+    getSchoolNotice (currentPage) {
+      this.$axios.post('http://127.0.0.1:3000/getSchoolNoticeList', {
         params: {
           page: currentPage,
           pageSize: this.pageSize
@@ -109,12 +108,12 @@ export default {
         }
       })
     },
-    updateRecruit (ID) {
-      this.$router.push({ path: `/admin/updateRecruit/${ID}` })
+    updateSchoolNotice (ID) {
+      this.$router.push({ path: `/admin/updateSchoolNotice/${ID}` })
     }
   },
   mounted () {
-    this.getRecruit(this.currentPage)
+    this.getSchoolNotice(this.currentPage)
   }
 }
 </script>

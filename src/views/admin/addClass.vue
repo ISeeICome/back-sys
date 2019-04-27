@@ -5,31 +5,9 @@
           <tr><td colspan="2">新建班级信息</td></tr>
         </thead>
         <tbody>
-          <!-- <tr>
-            <td><label for="">专业：</label></td>
-            <td>
-               <el-select v-model="majorName" placeholder="请选择专业" class="selectMajor">
-                <el-option
-                  v-for="(item, index) in majorOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
-          </tr> -->
           <tr>
             <td><label for="">年级：</label></td>
-            <td>
-              <el-select v-model="grade" placeholder="请选择年级" class="selectMajor">
-                <el-option
-                  v-for="(item, index) in gradeOptions"
-                  :key="index"
-                  :label="item"
-                  :value="item">
-                </el-option>
-              </el-select>
-            </td>
+            <td><el-input v-model="grade" placeholder="请输入年级"></el-input></td>
           </tr>
           <tr>
             <td><label for="">班级名称</label></td>
@@ -59,10 +37,7 @@ export default {
   },
   data () {
     return {
-      majorName: '',
-      majorOptions: [],
       grade: '',
-      gradeOptions: [],
       className: ''
     }
   },
@@ -71,13 +46,12 @@ export default {
       this.$router.back(-1)
     },
     addClass () {
-      if ( this.grade === '' || this.className === '') {
+      if (this.grade === '' || this.className === '') {
         alert('请将信息输入完整')
         return
       }
       this.$axios.post('http://127.0.0.1:3000/addClass', {
         params: {
-          // majorName: this.majorName,
           grade: this.grade,
           className: this.className
         }
@@ -87,34 +61,13 @@ export default {
           alert('添加成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          console.log(result)
+          alert('添加失败:' + result.msg)
         }
       })
     }
   },
-  mounted () {
-    var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
-      params: {
-        page: 0
-      }
-    }).then(res => {
-      var result = res.data
-      if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
-      }
-    })
-  }
+  mounted () {}
 }
 </script>
 

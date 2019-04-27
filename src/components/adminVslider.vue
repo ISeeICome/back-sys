@@ -3,7 +3,6 @@
         <el-collapse accordion>
             <el-collapse-item title="信息管理">
                 <div class='itemWrap'><router-link to="/admin/showBiogenicDis" class="item">校友统计</router-link></div>
-                <div class='itemWrap'><router-link to="/admin/majorManage" class="item">专业管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/classManage" class="item">班级管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/stuManage" class="item">校友管理</router-link></div>
             </el-collapse-item>
@@ -11,13 +10,15 @@
                 <div class='itemWrap'><router-link to="/admin/excellentStuManage" class="item">杰出校友管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/recruitManage" class="item">校友招聘管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/helpManage" class="item">校友帮扶管理</router-link></div>
+                <div class='itemWrap'><router-link to="/admin/schoolNoticeManage" class="item">公告管理</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="管理员管理">
                 <div class='itemWrap'><router-link to="/admin/commonAdmin" class="item">普通管理员</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/superAdmin" class="item">超级管理员</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="系统工具">
-                <div class='itemWrap'><router-link to="/login" class="item">退出系统</router-link></div>
+                <div class='itemWrap'><router-link to="/admin/examine" class="item">审核管理</router-link></div>
+                <div class='itemWrap'><router-link to="/" class="item">退出系统</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/updateAdminPwd" class="item">修改信息</router-link></div>
             </el-collapse-item>
         </el-collapse>

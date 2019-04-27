@@ -10,7 +10,8 @@
                 <div class='itemWrap'><router-link to="/stu/stuHelp" class="item">帮扶信息管理</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="系统工具">
-                <div class='itemWrap'><router-link to="/login" class="item">退出系统</router-link></div>
+                <div class='itemWrap'><router-link to="/stu/stuExamine" class="item" v-show="isClassAdmin">审核管理</router-link></div>
+                <div class='itemWrap'><router-link to="/" class="item">退出系统</router-link></div>
                 <div class='itemWrap'><router-link to="/stu/updatePwd" class="item">修改密码</router-link></div>
             </el-collapse-item>
         </el-collapse>
@@ -25,11 +26,14 @@ export default {
   name: 'slider',
   data () {
     return {
-      stuName: ''
+      stuName: '',
+      isClassAdmin: ''
     }
   },
   mounted () {
     this.ID = localStorage.getItem('ID')
+    this.isClassAdmin = localStorage.getItem('isClassAdmin') !== '0'
+    console.log(this.isClassAdmin)
     var that = this
     this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
       params: {

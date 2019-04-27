@@ -1,8 +1,7 @@
 <template>
     <div class="header">
-        <h1 class="fl">
-            <span class = "logo"></span>
-            <span class = "logo_text"></span>
+        <h1 class="fl logo">
+            <img src="../../static/img/logo.png" alt="">
         </h1>
         <div class="fr">
             <div class="signOut" ref="signOut">
@@ -19,7 +18,7 @@ export default {
   mounted () {
     this.$refs.signOut.onclick = () => {
       console.log(111)
-      this.$router.push({path: '/login'})
+      this.$router.push({path: '/'})
     }
   }
 }
@@ -31,23 +30,10 @@ export default {
         background: #2a94de;
         height: 80px;
         .logo{
-            display:inline-block;
-            width: 60px;
-            height: 60px;
-            background: url("../../static/img/logo.png") no-repeat;
-            background-size: contain;
-            float:left;
-            margin-top:10px;
-            margin-left:40px;
-        }
-        .logo_text{
-            display:inline-block;
-            float:left;
-            margin-left:-30px;
-            width: 300px;
-            height: 80px;
-            background: url("../../static/img/logo_text.png") center center no-repeat;
-            background-size: contain;
+            img{
+                float:left;
+                width:300px;
+            }
         }
         .signOut{
             margin-top:10px;

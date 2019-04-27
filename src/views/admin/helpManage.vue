@@ -89,7 +89,8 @@ export default {
     getHelpList (currentPage) {
       this.$axios.post('http://127.0.0.1:3000/getHelpList', {
         params: {
-          page: currentPage
+          page: currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         var result = res.data

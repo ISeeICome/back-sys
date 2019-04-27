@@ -6,51 +6,16 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">学号：</label></td>
-            <td><el-input v-model="stuID" placeholder="请输入学号"></el-input></td>
-          </tr>
-          <tr>
             <td><label for="">姓名：</label></td>
-            <td><el-input v-model="stuName" placeholder="请输入姓名"></el-input></td>
+            <td><el-input v-model="stuName" disabled></el-input></td>
           </tr>
           <tr>
             <td><label for="">年级</label></td>
-            <td>
-                <el-select v-model="grade" placeholder="请选择" class="selectGrade" @change="getClassList">
-                <el-option
-                  v-for="(item, index) in gradeOptions"
-                  :key="index"
-                  :label="item"
-                  :value="item">
-                </el-option>
-              </el-select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="">专业：</label></td>
-            <td>
-               <el-select v-model="majorName" placeholder="请选择" class="selectMajor" @change="getClassList">
-                <el-option
-                  v-for="(item, index) in majorOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
+            <td><el-input v-model="grade" disabled></el-input></td>
           </tr>
           <tr>
             <td><label for="">班级</label></td>
-            <td>
-               <el-select v-model="className" placeholder="请选择" class="selectClass">
-                <el-option
-                  v-for="(item, index) in classOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
+            <td><el-input v-model="className" placeholder="请输入姓名" disabled></el-input></td>
           </tr>
           <tr>
             <td><label for="">联系电话：</label></td>
@@ -98,7 +63,7 @@ export default {
     getClassList () {
       this.classOptions = []
       for (const key in this.classList) {
-        if (this.classList[key].grade === this.grade.toString() && this.classList[key].majorName === this.majorName) {
+        if (this.classList[key].grade === this.grade.toString()) {
           console.log(111)
           var object = {value: this.classList[key].className, label: this.classList[key].className}
           this.classOptions.push(object)
@@ -107,7 +72,6 @@ export default {
       console.log(this.classOptions)
     },
     updateStu () {
-      console.log(this.majorName)
       this.$axios.post('http://127.0.0.1:3000/admin/updateStu', {
         params: {
           ID: this.ID,
@@ -115,7 +79,6 @@ export default {
           stuName: this.stuName,
           stuPwd: '123456',
           grade: this.grade,
-          majorName: this.majorName,
           className: this.className,
           tel: this.tel,
           company: this.company,
@@ -131,6 +94,30 @@ export default {
           alert('修改失败', result.msg)
         }
       })
+    },
+    getSingleList () {
+      var that = this
+      this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
+        params: {
+          ID: this.ID
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          that.ID = result.data[0].ID
+          that.stuID = result.data[0].stuID
+          that.stuName = result.data[0].stuName
+          that.grade = result.data[0].grade
+          that.className = result.data[0].className
+          that.tel = result.data[0].tel
+          that.company = result.data[0].company
+          that.workCity = result.data[0].workCity
+          that.fromCity = result.data[0].fromCity
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
     }
   },
   data () {
@@ -138,7 +125,6 @@ export default {
       stuID: '',
       ID: '',
       stuName: '',
-      majorName: '',
       company: '',
       workCity: '',
       fromCity: '',
@@ -152,50 +138,7 @@ export default {
     }
   },
   mounted () {
-    this.ID = localStorage.getItem('ID')
-    var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
-      params: {
-        page: 0
-      }
-    }).then(res => {
-      var result = res.data
-      if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
-      }
-    })
-    this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
-      params: {
-        ID: this.ID
-      }
-    }).then(res => {
-      var result = res.data
-      console.log(result)
-      if (result.code === 1) {
-        that.ID = result.data[0].ID
-        that.stuID = result.data[0].stuID
-        that.stuName = result.data[0].stuName
-        that.majorName = result.data[0].majorName
-        that.grade = result.data[0].grade
-        that.className = result.data[0].className
-        that.tel = result.data[0].tel
-        that.company = result.data[0].company
-        that.workCity = result.data[0].workCity
-        that.fromCity = result.data[0].fromCity
-      } else {
-        alert('查询失败', result.msg)
-      }
-    })
+    this.getSingleList()
   }
 }
 </script>

@@ -6,8 +6,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">学号：</label></td>
-            <td><el-input v-model="stuID" placeholder="请输入学号"></el-input></td>
+            <td><label for="">用户名</label></td>
+            <td><el-input v-model="userName" placeholder="请输入用户名"></el-input></td>
           </tr>
           <tr>
             <td><label for="">姓名：</label></td>
@@ -22,19 +22,6 @@
                   :key="index"
                   :label="item"
                   :value="item">
-                </el-option>
-              </el-select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="">专业：</label></td>
-            <td>
-               <el-select v-model="majorName" placeholder="请选择" class="selectMajor" @change="getClassList">
-                <el-option
-                  v-for="(item, index) in majorOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
                 </el-option>
               </el-select>
             </td>
@@ -98,7 +85,7 @@ export default {
     getClassList () {
       this.classOptions = []
       for (const key in this.classList) {
-        if (this.classList[key].grade === this.grade.toString() && this.classList[key].majorName === this.majorName) {
+        if (this.classList[key].grade === this.grade.toString()) {
           console.log(111)
           var object = {value: this.classList[key].className, label: this.classList[key].className}
           this.classOptions.push(object)
@@ -107,13 +94,14 @@ export default {
       console.log(this.classOptions)
     },
     addStu () {
-      if (this.stuID === '' || this.stuName === '' || this.majorName === '' || this.grade === '' || this.className === '') {
+      if (this.userName === '' || this.stuName === '' || this.grade === '' || this.className === '') {
         alert('学号、姓名、年级、专业、班级为必填项，请输入完整')
         return
       }
+      console.log(this.className)
       this.$axios.post('http://127.0.0.1:3000/addStu', {
         params: {
-          stuID: this.stuID,
+          userName: this.userName,
           stuName: this.stuName,
           stuPwd: '123456',
           grade: this.grade,
@@ -130,7 +118,7 @@ export default {
           alert('添加成功')
           this.goBack()
         } else {
-          alert('添加失败', result.msg)
+          alert(result.msg)
         }
       })
     }
@@ -139,7 +127,7 @@ export default {
     return {
       stuID: '',
       stuName: '',
-      majorName: '',
+      userName: '',
       company: '',
       workCity: '',
       fromCity: '',
@@ -148,32 +136,11 @@ export default {
       className: '',
       classList: [],
       gradeOptions: [],
-      majorOptions: [],
       classOptions: []
     }
   },
   mounted () {
     var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
-      params: {
-        page: 0
-      }
-    }).then(res => {
-      var result = res.data
-      if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
-      }
-    })
     this.$axios.post('http://127.0.0.1:3000/getClassList', {
       params: {
         page: 0
@@ -183,6 +150,12 @@ export default {
       console.log(result)
       if (result.code === 1) {
         that.classList = result.data
+        that.classList.forEach((item, index) => {
+          if (that.gradeOptions.indexOf(item.grade) < 0) {
+            that.gradeOptions.push(item.grade)
+          }
+        })
+        console.log(that.gradeOptions)
       }
     })
   }

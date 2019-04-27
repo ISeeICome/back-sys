@@ -9,7 +9,6 @@
                     <tr>
                         <td>序号</td>
                         <td>班级ID</td>
-                        <td>专业</td>
                         <td>年级</td>
                         <td>班级名称</td>
                         <td>人数</td>
@@ -20,7 +19,6 @@
                      <tr v-for = "(item,index) in dataList" :key = "index">
                         <td>{{ getNumber ( index +1 ) }}</td>
                         <td>{{item.ID}}</td>
-                        <td>{{item.majorName}}</td>
                         <td>{{item.grade}}</td>
                         <td>{{item.className}}</td>
                         <td><span>{{countArr[index]}}</span></td>
@@ -60,9 +58,9 @@ export default {
     toAddClass () {
       this.$router.push({path: '/admin/addClass'})
     },
-    getClassStuCount (grade, majorName, className, index) {
+    getClassStuCount (grade, className, index) {
       var that = this
-      var searchObj = {grade: grade, majorName: majorName, className: className, stuName: '', page: '0'}
+      var searchObj = {grade: grade, className: className, stuName: '', page: '0'}
       this.$axios.post('http://127.0.0.1:3000/admin/searchStu', {
         params: {
           searchObj: searchObj
@@ -118,7 +116,7 @@ export default {
           this.dataList = result.data
           this.totalSize = result.totalSize
           this.dataList.forEach((item, index) => {
-            this.getClassStuCount(item.grade, item.majorName, item.className, index)
+            this.getClassStuCount(item.grade, item.className, index)
           })
         } else {
           alert('查询失败', result.msg)
@@ -140,7 +138,7 @@ export default {
           this.totalSize = result.totalSize
           console.log(this.dataList)
           for (var i = 0; i < this.dataList.length; i++) {
-            this.getClassStuCount(this.dataList[i].grade, this.dataList[i].majorName, this.dataList[i].className, i)
+            this.getClassStuCount(this.dataList[i].grade, this.dataList[i].className, i)
           }
           console.log(this.totalSize)
         } else {

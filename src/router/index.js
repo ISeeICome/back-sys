@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import admin from '@/views/admin/admin'
 import stu from '@/views/stu/stu'
-import login from '@/views/login'
+import backLogin from '@/views/backLogin'
 import StuManage from '@/views/admin/StuManage'
 import AddStuInfo from '@/views/admin/AddStuInfo'
 import showBiogenicDis from '@/views/admin/ShowBiogenicDis'
@@ -29,6 +29,10 @@ import updateStu from '@/views/admin/updateStu'
 import updateExcellentStu from '@/views/admin/updateExcellentstu'
 import updateHelp from '@/views/admin/updateHelp'
 import updateRecruit from '@/views/admin/updateRecruit'
+import examine from '@/views/admin/examine'
+import schoolNoticeManage from '@/views/admin/schoolNoticeManage'
+import addSchoolNotice from '@/views/admin/addSchoolNotice'
+import updateSchoolNotice from '@/views/admin/updateSchoolNotice'
 
 import personInfo from '@/views/stu/personInfo'
 import excellentStu from '@/views/stu/excellentStu'
@@ -36,15 +40,29 @@ import stuRecruit from '@/views/stu/stuRecruit'
 import stuHelp from '@/views/stu/stuHelp'
 import stuSys from '@/views/stu/stuSys'
 import updatePwd from '@/views/stu/updatePwd'
+import stuExamine from '@/views/stu/examine'
+
+import index from '@/views/official/index'
+import activeDetail from '@/views/official/activeDetail'
+import excellentStuO from '@/views/official/excellentStu'
+import stuHelpO from '@/views/official/stuHelp'
+import stuRecruitO from '@/views/official/stuRecruit'
+import schoolNoticeO from '@/views/official/schoolNotice'
+import registerAndLogin from '@/views/registerAndLogin'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: login
+      path: '/backLogin',
+      name: 'backLogin',
+      component: backLogin
+    },
+    {
+      path: '/registerAndLogin',
+      name: 'registerAndLogin',
+      component: registerAndLogin
     },
     {
       path: '/admin',
@@ -56,6 +74,21 @@ export default new Router({
           path: 'StuManage',
           name: 'StuManage',
           component: StuManage
+        },
+        {
+          path: 'schoolNoticeManage',
+          name: 'schoolNoticeManage',
+          component: schoolNoticeManage
+        },
+        {
+          path: 'addSchoolNotice',
+          name: 'addSchoolNotice',
+          component: addSchoolNotice
+        },
+        {
+          path: 'updateSchoolNotice/:ID',
+          name: 'updateSchoolNotice',
+          component: updateSchoolNotice
         },
         {
           path: 'excellentStuManage',
@@ -176,6 +209,11 @@ export default new Router({
           path: 'updateAdmin/:id',
           name: 'updateAdmin',
           component: updateAdmin
+        },
+        {
+          path: 'examine',
+          name: 'examine',
+          component: examine
         }
       ]
     },
@@ -214,12 +252,47 @@ export default new Router({
           path: 'updatePwd',
           name: 'updatePwd',
           component: updatePwd
+        },
+        {
+          path: 'stuExamine',
+          name: 'stuExamine',
+          component: stuExamine
         }
       ]
     },
     {
+      path: '/index',
+      name: 'index',
+      component: index
+    },
+    {
+      path: '/activeDetail',
+      name: 'activeDetail',
+      component: activeDetail
+    },
+    {
+      path: '/excellentStu',
+      name: 'excellentStu',
+      component: excellentStuO
+    },
+    {
+      path: '/stuHelp',
+      name: 'stuHelp',
+      component: stuHelpO
+    },
+    {
+      path: '/stuRecruit',
+      name: 'stuRecruit',
+      component: stuRecruitO
+    },
+    {
+      path: '/schoolNotice',
+      name: 'schoolNotice',
+      component: schoolNoticeO
+    },
+    {
       path: '/',
-      redirect: '/login'
+      redirect: '/index'
     }
   ]
 })

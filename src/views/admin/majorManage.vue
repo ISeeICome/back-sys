@@ -9,7 +9,6 @@
                     <tr>
                         <td>序号</td>
                         <td>专业ID</td>
-                        <td>专业名称</td>
                         <td class="setting">操作</td>
                     </tr>
                 </thead>
@@ -17,7 +16,6 @@
                     <tr v-for = "(item,index) in dataList" :key = "index">
                         <td>{{ getNumber ( index+1 ) }}</td>
                         <td>{{item.ID}}</td>
-                        <td>{{item.majorName}}</td>
                         <td>
                             <el-button type="warning" class='update' @click="updateMajor(item.ID)">修改</el-button>
                             <el-button type="danger"  class='del' :ID="item.ID" @click="delMajor(item.ID)">删除</el-button>
