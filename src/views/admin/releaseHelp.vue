@@ -9,10 +9,6 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">帮扶人学号：</label></td>
-            <td><el-input v-model="stuID" placeholder="请输入帮扶人学号"></el-input></td>
-          </tr>
-          <tr>
             <td><label for="">帮扶人姓名：</label></td>
             <td><el-input v-model="stuName" placeholder="请输入帮扶人姓名"></el-input></td>
           </tr>
@@ -52,7 +48,6 @@ export default {
   data () {
     return {
       stuName: '',
-      stuID: '',
       content: '',
       date: ''
     }
@@ -69,7 +64,6 @@ export default {
       var date = new Date().toLocaleDateString()
       this.$axios.post('http://127.0.0.1:3000/addHelp', {
         params: {
-          stuID: this.stuID,
           stuName: this.stuName,
           content: this.content,
           date: date

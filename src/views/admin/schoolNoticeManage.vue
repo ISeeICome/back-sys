@@ -1,13 +1,13 @@
 <template>
     <div class="recruitManage">
         <div class="statusBar">
-            <label>招聘信息列表</label>
+            <label>公告</label>
         </div>
         <div class="content">
             <ul>
                 <li v-for = "(item,index) in dataList" :key = "index">
                     <h2>
-                        公告标题{{item.title}}
+                        {{item.title}}
                         <el-button type="danger"  class='delete' @click="delSchoolNotice(item.ID)">删除</el-button>
                         <el-button type="danger"  class='update' @click="updateSchoolNotice(item.ID)">修改</el-button>
                         <div class="releaseTime">发布时间：{{item.date}}</div>
@@ -77,7 +77,8 @@ export default {
     handleCurrentChange (val) {
       this.$axios.post('http://127.0.0.1:3000/getSchoolNoticeList', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         var result = res.data

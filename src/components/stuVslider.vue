@@ -4,10 +4,8 @@
             <el-collapse-item title="个人信息管理">
                 <div class='itemWrap'><router-link to="/stu/personInfo" class="item">个人信息管理</router-link></div>
             </el-collapse-item>
-            <el-collapse-item title="校友互动">
-                <div class='itemWrap'><router-link to="/stu/excellentStu" class="item">杰出校友管理</router-link></div>
-                <div class='itemWrap'><router-link to="/stu/stuRecruit" class="item">招聘信息管理</router-link></div>
-                <div class='itemWrap'><router-link to="/stu/stuHelp" class="item">帮扶信息管理</router-link></div>
+            <el-collapse-item title="班级公告">
+                <div class='itemWrap'><router-link to="/stu/classNoticeManage" class="item">班级公告</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="系统工具">
                 <div class='itemWrap'><router-link to="/stu/stuExamine" class="item" v-show="isClassAdmin">审核管理</router-link></div>
@@ -17,6 +15,7 @@
         </el-collapse>
         <div class="admin">
             用户：{{stuName}}
+            <p v-show="isClassAdmin">班级管理员</p>
         </div>
     </div>
 </template>
@@ -32,7 +31,11 @@ export default {
   },
   mounted () {
     this.ID = localStorage.getItem('ID')
-    this.isClassAdmin = localStorage.getItem('isClassAdmin') !== '0'
+    if (localStorage.getItem('isClassAdmin') !== '0') {
+      this.isClassAdmin = true
+    } else {
+      this.isClassAdmin = false
+    }
     console.log(this.isClassAdmin)
     var that = this
     this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
@@ -89,8 +92,10 @@ export default {
         }
         .admin{
             position:absolute;
-            padding-left:20px;
+            width:180px;
+            text-align: center;
             bottom:50px;
+            line-height:40px;
             color:#fff;
         }
     }

@@ -14,7 +14,7 @@
             <div class="bar">杰出校友</div>
               <ul>
                 <li v-for = "(item,index) in data" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleExcellentStu',item.ID)">
-                  <span class="title">{{item.stuName}}：</span><span class="content">{{item.content}}</span><span class="date">{{item.date}}</span>
+                  <span class="title">{{item.stuName}}</span><span class="date">{{item.date}}</span>
                 </li>
               </ul>
               <el-pagination
@@ -140,7 +140,6 @@ export default {
         cursor: pointer;
         .title{
           float:left;
-          width:80px;
         }
         .content{
           width:720px;

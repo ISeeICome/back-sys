@@ -6,8 +6,12 @@
         </thead>
         <tbody>
           <tr>
+            <td><label for="">用户名：</label></td>
+            <td><el-input v-model="userName"></el-input></td>
+          </tr>
+          <tr>
             <td><label for="">姓名：</label></td>
-            <td><el-input v-model="stuName" disabled></el-input></td>
+            <td><el-input v-model="stuName"></el-input></td>
           </tr>
           <tr>
             <td><label for="">年级</label></td>
@@ -75,21 +79,20 @@ export default {
       this.$axios.post('http://127.0.0.1:3000/admin/updateStu', {
         params: {
           ID: this.ID,
-          stuID: this.stuID,
+          userName: this.userName,
           stuName: this.stuName,
-          stuPwd: '123456',
           grade: this.grade,
           className: this.className,
           tel: this.tel,
           company: this.company,
           workCity: this.workCity,
-          fromCity: this.fromCity
+          fromCity: this.fromCity,
+          isClassAdmin: this.isClassAdmin
         }
       }).then(res => {
         var result = res.data
         if (result.code === 1) {
           alert('修改成功')
-          this.goBack()
         } else {
           alert('修改失败', result.msg)
         }
@@ -105,6 +108,7 @@ export default {
         var result = res.data
         console.log(result)
         if (result.code === 1) {
+          that.userName = result.data[0].userName
           that.ID = result.data[0].ID
           that.stuID = result.data[0].stuID
           that.stuName = result.data[0].stuName
@@ -122,6 +126,7 @@ export default {
   },
   data () {
     return {
+      userName: '',
       stuID: '',
       ID: '',
       stuName: '',
@@ -134,10 +139,15 @@ export default {
       classList: [],
       gradeOptions: [],
       majorOptions: [],
-      classOptions: []
+      classOptions: [],
+      isClassAdmin: ''
     }
   },
   mounted () {
+    this.ID = localStorage.getItem('ID')
+    this.isClassAdmin = localStorage.getItem('isClassAdmin')
+    this.grade = localStorage.getItem('grade')
+    this.className = localStorage.getItem('className')
     this.getSingleList()
   }
 }

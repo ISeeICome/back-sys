@@ -24,14 +24,14 @@
             </el-select>
             <label>姓名:</label><el-input v-model="stuName" placeholder="请输入内容"></el-input>
             <el-button type="success" id="search" @click="search">搜索</el-button>
-            <el-button @click="exportExcel" style="margin-top: 2px;" size="medium" type="success">导出</el-button>
+            <el-button @click="exportExcel" size="medium" type="success" id="export">导出</el-button>
         </div>
         <div class="stuInfoTable">
             <table>
                 <thead>
                     <tr>
                         <td>序号</td>
-                        <td>学号</td>
+                        <td>ID</td>
                         <td>姓名</td>
                         <td>年级</td>
                         <td>班级</td>
@@ -82,8 +82,8 @@ export default {
   methods: {
     exportExcel () {
       require.ensure([], () => {
-        const tHeader = ['序号', '省份', '投资总额', '收益总额', '主要投资项目', '投资周期', '投资人数', '投资年变化率', '备注']
-        const filterVal = ['index', 'provinces', 'orderMoney', 'incomeMoney', 'payType', 'orderPeriod', 'orderPersonConunt', 'orderYearRate', 'remarks']
+        const tHeader = ['ID', '姓名', '年级', '班级', '联系电话', '工作单位', '就业省市', '生源地', '权限']
+        const filterVal = ['ID', 'stuName', 'grade', 'className', 'tel', 'company', 'workCity', 'fromCity', 'isClassAdmin']
         const list = this.tableData
         const data = this.formatJson(filterVal, list)
         exportJsonToExcel(tHeader, data, '列表excel')
@@ -177,6 +177,7 @@ export default {
         console.log(result)
         if (result.code === 1) {
           this.dataList = result.data
+          this.tableData = result.data
           this.totalSize = result.totalSize
           console.log(this.totalSize)
         } else {
@@ -230,7 +231,7 @@ export default {
       gradeOptions: [],
       majorOptions: [],
       classOptions: [],
-      tableData: [{'index': 1, 'provinces': 1, 'orderMoney': 1, 'incomeMoney': 1, 'payType': 1, 'orderPeriod': 1, 'orderPersonConunt': 1, 'orderYearRate': 1, 'remarks': 1}]
+      tableData: []
     }
   },
   mounted () {
@@ -249,9 +250,11 @@ export default {
             that.gradeOptions.push(item.grade)
           }
         })
+        that.gradeOptions = that.gradeOptions.sort().reverse()
         console.log(that.gradeOptions)
       }
     })
+    this.getStuList(this.currentPage)
   }
 }
 </script>
@@ -317,6 +320,10 @@ export default {
                     border:1px solid #000;
                 }
             }
+        }
+        #export{
+          height:40px;
+          margin-top:0;
         }
         .update{
             float:left;

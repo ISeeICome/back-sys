@@ -19,7 +19,7 @@
               </tr>
               <tr>
                 <td><label for="">密&ensp;&ensp;&ensp;&ensp;码：</label></td>
-                <td><el-input v-model="pwd" placeholder="请输入密码"></el-input></td>
+                <td><el-input v-model="pwd" placeholder="请输入密码" show-password></el-input></td>
               </tr>
             </tbody>
           </table>

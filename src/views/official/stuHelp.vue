@@ -7,13 +7,13 @@
         </div>
         <div class="content">
           <div class="fl">
-            <div class="moduleName">杰出校友</div>
+            <div class="moduleName">校友帮扶</div>
             <div class="bg"></div>
           </div>
           <div class="fr">
-            <div class="bar">杰出校友</div>
+            <div class="bar">校友帮扶</div>
               <ul>
-                <li v-for = "(item,index) in data" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleExcellentStu',item.ID)">
+                <li v-for = "(item,index) in data" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleHelp',item.ID)">
                   <span class="title">{{item.stuName}}：</span><span class="content">{{item.content}}</span><span class="date">{{item.date}}</span>
                 </li>
               </ul>
@@ -55,7 +55,7 @@ export default {
       this.$router.push({name: 'activeDetail', params: { src: src, ID: ID }})
     },
     getData (src, ID) {
-      this.$axios.post('http://127.0.0.1:3000/getExcellentStuList', {
+      this.$axios.post('http://127.0.0.1:3000/getHelpList', {
         params: {
           page: 1,
           pageSize: 8

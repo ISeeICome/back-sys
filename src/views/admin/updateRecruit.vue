@@ -26,16 +26,12 @@
             <td><label for="">工作单位：</label></td>
             <td><el-input v-model="workAddress" placeholder="请输入工作地址"></el-input></td>
           </tr>
-          <tr>
-            <td>
-              <el-button type="primary" @click="goBack">返回</el-button>
-            </td>
-            <td>
-              <el-button type="success" id="addBtn"  @click="updateRecruit">修改</el-button>
-            </td>
-          </tr>
         </tbody>
       </table>
+      <div>
+        <el-button type="primary" @click="goBack">返回</el-button>
+        <el-button type="success" id="addBtn"  @click="updateRecruit">修改</el-button>
+      </div>
     </div>
 </template>
 

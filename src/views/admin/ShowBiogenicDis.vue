@@ -28,6 +28,14 @@ export default {
     Vheader,
     adminVslider
   },
+  data () {
+    return {
+      workCount: '',
+      notWorkCount: '',
+      option1: [],
+      option2: []
+    }
+  },
   methods: {
     createEchart (el, option) {
       var echart = echarts.init(el)
@@ -35,59 +43,91 @@ export default {
     }
   },
   mounted () {
-    var option1 = {
-      title: {
-        text: '就业形式'
-      },
-      tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-      },
-      series: [
-        {
-          name: '访问来源',
-          type: 'pie',
-          radius: '55%',
-          center: ['50%', '60%'],
-          data: [
-            {value: 335, name: '已就业'},
-            {value: 310, name: '未就业'}
-          ],
-          itemStyle: {
-            emphasis: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+    var that = this
+    this.$axios.post('http://127.0.0.1:3000/getWorkCount', {
+      params: {}
+    }).then(res => {
+      var result = res.data
+      console.log(result)
+      if (result.code === 1) {
+        that.workCount = result.workCount
+        that.notWorkCount = result.notWorkCount
+        that.option1 = {
+          title: {
+            text: '就业形式'
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+          },
+          series: [
+            {
+              name: '访问来源',
+              type: 'pie',
+              radius: '55%',
+              center: ['50%', '60%'],
+              data: [
+                {value: that.workCount, name: '已就业'},
+                {value: that.notWorkCount, name: '未就业'}
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
             }
-          }
+          ]
         }
-      ]
-    }
-    this.createEchart(document.getElementById('echart1'), option1)
-    var option2 = {
-      title: {
-        text: '各专业就业详情'
-      },
-      tooltip: {},
-      legend: {
-        data: ['人数']
-      },
-      xAxis: {
-        data: ['计算机科学与技术', '土木工程', '电子信息工程', '汉语言文学', '应用化学', '机械工程']
-      },
-      yAxis: {},
-      series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-      }]
-    }
-    this.createEchart(document.getElementById('echart2'), option2)
+        that.createEchart(document.getElementById('echart1'), that.option1)
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
+    this.$axios.post('http://127.0.0.1:3000/getGradeWorkCount', {
+      params: {}
+    }).then(res => {
+      var result = res.data
+      var gradeData = []
+      var countData = []
+      console.log(result)
+      result.workCountData.forEach((item, index) => {
+        gradeData.push(item.grade)
+      })
+      result.workCountData.forEach((item, index) => {
+        countData.push(item.workCount)
+      })
+      if (result.code === 1) {
+        that.option2 = {
+          title: {
+            text: '各届就业详情'
+          },
+          tooltip: {},
+          legend: {
+            data: ['人数']
+          },
+          xAxis: {
+            data: gradeData
+          },
+          yAxis: {},
+          series: [{
+            name: '就业人数',
+            type: 'bar',
+            data: countData
+          }]
+        }
+        console.log(that.option2)
+        that.createEchart(document.getElementById('echart2'), that.option2)
+      } else {
+        alert('查询失败', result.msg)
+      }
+    })
   }
 }
 </script>

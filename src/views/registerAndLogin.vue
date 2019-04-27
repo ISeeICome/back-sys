@@ -19,11 +19,11 @@
               </tr>
               <tr>
                 <td><label for="">密&ensp;&ensp;&ensp;&ensp;码：</label></td>
-                <td><el-input v-model="pwd1" placeholder="请输入密码"></el-input></td>
+                <td><el-input v-model="pwd1" placeholder="请输入密码" show-password></el-input></td>
               </tr>
               <tr>
                 <td><label for="">确认密码：</label></td>
-                <td><el-input v-model="pwd2" placeholder="请确认密码"></el-input></td>
+                <td><el-input v-model="pwd2" placeholder="请确认密码" show-password></el-input></td>
               </tr>
               <tr>
                 <td><label for="">姓&ensp;&ensp;&ensp;&ensp;名：</label></td>
@@ -98,7 +98,7 @@
               </tr>
               <tr>
                 <td><label for="">密&ensp;&ensp;&ensp;&ensp;码：</label></td>
-                <td><el-input v-model="loginPwd" placeholder="请输入密码"></el-input></td>
+                <td><el-input v-model="loginPwd" placeholder="请输入密码" show-password></el-input></td>
               </tr>
             </tbody>
           </table>
@@ -123,7 +123,8 @@ export default {
   },
   data () {
     return {
-      isRegister: true,
+      isRegister: false,
+      userName: '',
       stuName: '',
       company: '',
       workCity: '',
@@ -144,13 +145,29 @@ export default {
     goBack () {
       this.$router.back(-1)
     },
+    getClassList () {
+      this.classOptions = []
+      for (const key in this.classList) {
+        if (this.classList[key].grade === this.grade.toString()) {
+          console.log(111)
+          var object = {value: this.classList[key].className, label: this.classList[key].className}
+          this.classOptions.push(object)
+        }
+      }
+      console.log(this.classOptions)
+    },
     addStu () {
-      if (this.stuName === '' || this.majorName === '' || this.grade === '' || this.className === '') {
+      if (this.pwd1 !== this.pwd2) {
+        alert('密码输入错误，请重新输入')
+        return
+      }
+      if (this.userName === '' || this.stuName === '' || this.pwd1 === '' || this.pwd2 === '' || this.majorName === '' || this.grade === '' || this.className === '') {
         alert('姓名、年级、班级为必填项，请输入完整')
         return
       }
       this.$axios.post('http://127.0.0.1:3000/addStu', {
         params: {
+          userName: this.userName,
           stuName: this.stuName,
           stuPwd: this.pwd2,
           grade: this.grade,
@@ -183,7 +200,8 @@ export default {
           if (result.code === 1) {
             localStorage.setItem('ID', result.data[0].ID)
             localStorage.setItem('grade', result.data[0].grade)
-            localStorage.setItem('classNam', result.data[0].classNam)
+            localStorage.setItem('className', result.data[0].className)
+            localStorage.setItem('isClassAdmin', result.data[0].isClassAdmin)
             this.$router.push({path: '/stu'})
           } else {
             alert('登录失败', result.msg)
@@ -196,26 +214,6 @@ export default {
   },
   mounted () {
     var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
-      params: {
-        page: 0
-      }
-    }).then(res => {
-      var result = res.data
-      if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
-      }
-    })
     this.$axios.post('http://127.0.0.1:3000/getClassList', {
       params: {
         page: 0
@@ -225,6 +223,12 @@ export default {
       console.log(result)
       if (result.code === 1) {
         that.classList = result.data
+        that.classList.forEach((item, index) => {
+          if (that.gradeOptions.indexOf(item.grade) < 0) {
+            that.gradeOptions.push(item.grade)
+          }
+        })
+        console.log(that.gradeOptions)
       }
     })
   }

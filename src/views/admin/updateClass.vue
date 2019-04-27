@@ -6,19 +6,6 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">专业：</label></td>
-            <td>
-               <el-select v-model="majorName" placeholder="请选择" class="selectMajor">
-                <el-option
-                  v-for="(item, index) in majorOptions"
-                  :key="index"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </td>
-          </tr>
-          <tr>
             <td><label for="">年级：</label></td>
             <td>
                 <el-select v-model="grade" placeholder="请选择" class="selectMajor">
@@ -64,7 +51,6 @@ export default {
     updateClass () {
       this.$axios.post('http://127.0.0.1:3000/admin/updateClass', {
         params: {
-          majorName: this.majorName,
           grade: this.grade,
           className: this.className,
           ID: this.ID
@@ -82,23 +68,16 @@ export default {
   },
   data () {
     return {
-      majorName: '',
-      majorOptions: [],
       grade: '',
       className: '',
       ID: '',
-      gradeOptions: []
+      gradeOptions: [],
+      classList: ''
     }
   },
   mounted () {
-    this.ID = this.$route.params.ID
     var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
+    this.ID = this.$route.params.ID
     this.$axios.post('http://127.0.0.1:3000/admin/getSingleClass', {
       params: {
         ID: this.ID
@@ -107,25 +86,27 @@ export default {
       var result = res.data
       if (result.code === 1) {
         console.log(result)
-        that.majorName = result.data[0].majorName
         that.grade = result.data[0].grade
         that.className = result.data[0].className
       } else {
         alert('查询失败', result.msg)
       }
     })
-    this.$axios.post('http://127.0.0.1:3000/getMajorList', {
+    this.$axios.post('http://127.0.0.1:3000/getClassList', {
       params: {
         page: 0
       }
     }).then(res => {
       var result = res.data
+      console.log(result)
       if (result.code === 1) {
-        for (const key in result.data) {
-          var object = {value: result.data[key].majorName, label: result.data[key].majorName}
-          that.majorOptions.push(object)
-        }
-      } else {
+        that.classList = result.data
+        that.classList.forEach((item, index) => {
+          if (that.gradeOptions.indexOf(item.grade) < 0) {
+            that.gradeOptions.push(item.grade)
+          }
+        })
+        console.log(that.gradeOptions)
       }
     })
   }

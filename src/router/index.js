@@ -7,7 +7,6 @@ import backLogin from '@/views/backLogin'
 import StuManage from '@/views/admin/StuManage'
 import AddStuInfo from '@/views/admin/AddStuInfo'
 import showBiogenicDis from '@/views/admin/ShowBiogenicDis'
-import showeEploymentDis from '@/views/admin/ShoweEploymentDis'
 import addMajor from '@/views/admin/addMajor'
 import addClass from '@/views/admin/addClass'
 import majorManage from '@/views/admin/majorManage'
@@ -41,6 +40,9 @@ import stuHelp from '@/views/stu/stuHelp'
 import stuSys from '@/views/stu/stuSys'
 import updatePwd from '@/views/stu/updatePwd'
 import stuExamine from '@/views/stu/examine'
+import classNoticeManage from '@/views/stu/classNoticeManage'
+import addClassNotice from '@/views/stu/addClassNotice'
+import updateClassNotice from '@/views/stu/updateClassNotice'
 
 import index from '@/views/official/index'
 import activeDetail from '@/views/official/activeDetail'
@@ -129,11 +131,6 @@ export default new Router({
           path: 'showBiogenicDis',
           name: 'showBiogenicDis',
           component: showBiogenicDis
-        },
-        {
-          path: 'showeEploymentDis',
-          name: 'showeEploymentDis',
-          component: showeEploymentDis
         },
         {
           path: 'majorManage',
@@ -227,6 +224,21 @@ export default new Router({
           path: 'personInfo',
           name: 'personInfo',
           component: personInfo
+        },
+        {
+          path: 'classNoticeManage',
+          name: 'classNoticeManage',
+          component: classNoticeManage
+        },
+        {
+          path: 'addClassNotice',
+          name: 'addClassNotice',
+          component: addClassNotice
+        },
+        {
+          path: 'updateClassNotice/:ID',
+          name: 'updateClassNotice',
+          component: updateClassNotice
         },
         {
           path: 'excellentStu',

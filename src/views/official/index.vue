@@ -19,7 +19,7 @@
         </swiper>
         <ul class="brief">
           <li>
-            <h2><span class="bigTitle">杰出校友</span><span class="more">更多</span></h2>
+            <h2><span class="bigTitle">杰出校友</span><router-link to = "/excellentStu" class="more">更多</router-link></h2>
             <ol>
               <li v-for = "(item,index) in excellentStuList" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleExcellentStu',item.ID)">
                 <span class="title">{{item.stuName}}</span><span class="date">{{item.date}}</span>
@@ -27,7 +27,7 @@
             </ol>
           </li>
           <li>
-            <h2><span class="bigTitle">招聘信息</span><span class="more">更多</span></h2>
+            <h2><span class="bigTitle">招聘信息</span><router-link to = "/stuRecruit" class="more">更多</router-link></h2>
             <ol>
               <li v-for = "(item,index) in recruitList" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleRecruit',item.ID)">
                 <span class="title">{{item.recruitName}}</span><span class="date">{{item.date}}</span>
@@ -35,18 +35,18 @@
             </ol>
           </li>
           <li>
-            <h2><span class="bigTitle">校友帮扶</span><span class="more">更多</span></h2>
+            <h2><span class="bigTitle">校友帮扶</span><router-link to = "/stuHelp" class="more">更多</router-link></h2>
             <ol>
-              <li v-for = "(item,index) in helpList" :key="index" @click="toDetail('http://127.0.0.1:3000/getSingleHelp',item.ID)">
-                <span class="title">{{item.name}}</span><span class="date">{{item.date}}</span>
+              <li v-for = "(item,index) in helpList" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleHelp',item.ID)">
+                <span class="title">贫困生：{{item.stuName}}</span><span class="date">{{item.date}}</span>
               </li>
             </ol>
           </li>
           <li>
-            <h2><span class="bigTitle">公告</span><span class="more">更多</span></h2>
+            <h2><span class="bigTitle">学校公告</span><router-link to = "/schoolNotice" class="more">更多</router-link></h2>
             <ol>
-              <li v-for = "(item,index) in noticeList" :key="index" @click="toDetail('http://127.0.0.1:3000/',item.ID)">
-                <span class="title">{{item.name}}</span><span class="date">{{item.date}}</span>
+              <li v-for = "(item,index) in noticeList" :key="index" @click="toDetail('http://127.0.0.1:3000/admin/getSingleSchoolNotice',item.ID)">
+                <span class="title">{{item.title}}</span><span class="date">{{item.date}}</span>
               </li>
             </ol>
           </li>
@@ -123,7 +123,7 @@ export default {
         var result = res.data
         console.log(result)
         if (result.code === 1) {
-          this.helptList = result.data
+          this.helpList = result.data
         } else {
           alert('查询失败', result.msg)
         }
@@ -145,6 +145,22 @@ export default {
         }
       })
     },
+    getSchoolNotice () {
+      this.$axios.post('http://127.0.0.1:3000/getSchoolNoticeList', {
+        params: {
+          page: 1,
+          pageSize: 6
+        }
+      }).then(res => {
+        var result = res.data
+        console.log(result)
+        if (result.code === 1) {
+          this.noticeList = result.data
+        } else {
+          alert('查询失败', result.msg)
+        }
+      })
+    },
     toDetail (src, ID) {
       this.$router.push({name: 'activeDetail', params: { src: src, ID: ID }})
     }
@@ -153,6 +169,7 @@ export default {
     this.getHelpList()
     this.getRecruit()
     this.getExcellentStuList()
+    this.getSchoolNotice()
   }
 }
 </script>

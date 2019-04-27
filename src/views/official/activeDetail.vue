@@ -61,9 +61,15 @@ export default {
             this.date = result.data[0].date
           }
           if (src === 'http://127.0.0.1:3000/admin/getSingleHelp') {
-            this.title = result.data[0].recruitName
+            this.title = '贫困生' + result.data[0].stuName
             this.detail = result.data[0].content
             this.bigTitle = '校友互助'
+            this.date = result.data[0].date
+          }
+          if (src === 'http://127.0.0.1:3000/admin/getSingleSchoolNotice') {
+            this.title = result.data[0].title
+            this.detail = result.data[0].content
+            this.bigTitle = '学校公告'
             this.date = result.data[0].date
           }
         } else {

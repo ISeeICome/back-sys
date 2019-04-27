@@ -6,8 +6,8 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">学号：</label></td>
-            <td><el-input v-model="stuID" placeholder="请输入学号"></el-input></td>
+            <td><label for="">用户名：</label></td>
+            <td><el-input v-model="userName" placeholder="请输入姓名"></el-input></td>
           </tr>
           <tr>
             <td><label for="">姓名：</label></td>
@@ -80,10 +80,12 @@ export default {
       console.log(this.classOptions)
     },
     updateStu () {
+      if (this.isClassAdmin === '班级管理员') this.isClassAdmin = 1
+      if (this.isClassAdmin === '无') this.isClassAdmin = 0
       this.$axios.post('http://127.0.0.1:3000/admin/updateStu', {
         params: {
           ID: this.ID,
-          stuID: this.stuID,
+          userName: this.userName,
           stuName: this.stuName,
           stuPwd: '123456',
           grade: this.grade,
@@ -130,12 +132,6 @@ export default {
   mounted () {
     this.ID = this.$route.params.ID
     var that = this
-    var data = new Date()
-    var year = data.getFullYear()
-    for (var i = 0; i <= 4; i++) {
-      this.gradeOptions.push(year)
-      year -= 1
-    }
     this.$axios.post('http://127.0.0.1:3000/stu/getSingleStu', {
       params: {
         ID: this.ID
@@ -145,7 +141,7 @@ export default {
       console.log(result)
       if (result.code === 1) {
         that.ID = result.data[0].ID
-        that.stuID = result.data[0].stuID
+        that.userName = result.data[0].userName
         that.stuName = result.data[0].stuName
         that.grade = result.data[0].grade
         that.className = result.data[0].className
@@ -153,6 +149,7 @@ export default {
         that.company = result.data[0].company
         that.workCity = result.data[0].workCity
         that.fromCity = result.data[0].fromCity
+        that.isClassAdmin = result.data[0].isClassAdmin
         if (result.data[0].isClassAdmin === 1) { that.isClassAdmin = '班级管理员' } else {
           that.isClassAdmin = '无'
         }

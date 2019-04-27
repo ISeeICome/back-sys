@@ -88,7 +88,8 @@ export default {
     handleCurrentChange (val) {
       this.$axios.post('http://127.0.0.1:3000/getCommonAdminList', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         var result = res.data
@@ -104,7 +105,8 @@ export default {
     getCommonAdminList (currentPage) {
       this.$axios.post('http://127.0.0.1:3000/getCommonAdminList', {
         params: {
-          page: currentPage
+          page: currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         var result = res.data
