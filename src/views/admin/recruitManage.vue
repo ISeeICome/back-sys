@@ -78,7 +78,8 @@ export default {
     handleCurrentChange (val) {
       this.$axios.post('http://127.0.0.1:3000/getRecruitList', {
         params: {
-          page: this.currentPage
+          page: this.currentPage,
+          pageSize: this.pageSize
         }
       }).then(res => {
         var result = res.data

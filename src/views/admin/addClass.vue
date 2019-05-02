@@ -6,6 +6,11 @@
         </thead>
         <tbody>
           <tr>
+            <td><label for="">班级编号：</label></td>
+            <td><el-input v-model="classNum" placeholder="请输入班级编号"></el-input></td>
+          </tr>
+          <tr>
+          <tr>
             <td><label for="">年级：</label></td>
             <td><el-input v-model="grade" placeholder="请输入年级"></el-input></td>
           </tr>
@@ -38,7 +43,8 @@ export default {
   data () {
     return {
       grade: '',
-      className: ''
+      className: '',
+      classNum: ''
     }
   },
   methods: {
@@ -46,14 +52,15 @@ export default {
       this.$router.back(-1)
     },
     addClass () {
-      if (this.grade === '' || this.className === '') {
+      if (this.grade === '' || this.className === '' || this.classNum === '') {
         alert('请将信息输入完整')
         return
       }
       this.$axios.post('http://127.0.0.1:3000/addClass', {
         params: {
           grade: this.grade,
-          className: this.className
+          className: this.className,
+          classNum: this.classNum
         }
       }).then(res => {
         var result = res.data

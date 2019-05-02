@@ -31,7 +31,6 @@
                 <thead>
                     <tr>
                         <td>序号</td>
-                        <td>ID</td>
                         <td>姓名</td>
                         <td>年级</td>
                         <td>班级</td>
@@ -46,7 +45,6 @@
                 <tbody>
                     <tr v-for = "(item,index) in dataList" :key = "index">
                         <td>{{ getNumber ( index +1) }}</td>
-                        <td>{{item.ID}}</td>
                         <td>{{item.stuName}}</td>
                         <td>{{item.grade}}</td>
                         <td>{{item.className}}</td>

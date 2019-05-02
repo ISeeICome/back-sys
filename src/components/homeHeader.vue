@@ -4,10 +4,10 @@
       <h2></h2>
       <ul>
         <router-link tag = 'li' to = "/index">首页</router-link>
-        <router-link tag = 'li' to = "/excellentStu">杰出校友</router-link>
-        <router-link tag = 'li' to = "/stuRecruit">校友招聘</router-link>
-        <router-link tag = 'li' to = "/stuHelp">校友帮扶</router-link>
         <router-link tag = 'li' to = "/schoolNotice">学校公告</router-link>
+        <router-link tag = 'li' to = "/stuRecruit">校友招聘</router-link>
+        <router-link tag = 'li' to = "/excellentStu">杰出校友</router-link>
+        <router-link tag = 'li' to = "/stuHelp">校友帮扶</router-link>
         <router-link tag = 'li' to = "/registerAndLogin">校友注册/登录</router-link>
         <router-link tag = 'li' to = "/backLogin">后台登录</router-link>
       </ul>
@@ -28,7 +28,7 @@ export default {
       margin:0 auto;
     }
     h2{
-      width:300px;
+      width:400px;
       height:80px;
       background:url("../../static/img/logo.png") center center no-repeat;
       float:left;

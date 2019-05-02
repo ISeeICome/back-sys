@@ -6,6 +6,10 @@
         </thead>
         <tbody>
           <tr>
+            <td><label for="">班级编号</label></td>
+            <td><el-input v-model="classNum" placeholder="请输入班级编号"></el-input></td>
+          </tr>
+          <tr>
             <td><label for="">年级：</label></td>
             <td>
                 <el-select v-model="grade" placeholder="请选择" class="selectMajor">
@@ -72,7 +76,8 @@ export default {
       className: '',
       ID: '',
       gradeOptions: [],
-      classList: ''
+      classList: '',
+      classNum: ''
     }
   },
   mounted () {
@@ -88,6 +93,7 @@ export default {
         console.log(result)
         that.grade = result.data[0].grade
         that.className = result.data[0].className
+        that.classNum = result.data[0].classNum
       } else {
         alert('查询失败', result.msg)
       }

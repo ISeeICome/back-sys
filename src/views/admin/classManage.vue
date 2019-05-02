@@ -8,7 +8,7 @@
                 <thead>
                     <tr>
                         <td>序号</td>
-                        <td>班级ID</td>
+                        <td>班级编号</td>
                         <td>年级</td>
                         <td>班级名称</td>
                         <td>人数</td>
@@ -18,7 +18,7 @@
                 <tbody>
                      <tr v-for = "(item,index) in dataList" :key = "index">
                         <td>{{ getNumber ( index +1 ) }}</td>
-                        <td>{{item.ID}}</td>
+                        <td>{{item.classNum}}</td>
                         <td>{{item.grade}}</td>
                         <td>{{item.className}}</td>
                         <td><span>{{countArr[index]}}</span></td>
@@ -51,7 +51,8 @@ export default {
       currentPage: 1,
       pageSize: 10,
       totalSize: 0,
-      countArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      countArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      classNum: ''
     }
   },
   methods: {

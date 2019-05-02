@@ -32,8 +32,8 @@ export default {
         .logo{
             img{
                 float:left;
-                width:300px;
-            }
+                width:500px;
+                margin-left:40px;            }
         }
         .signOut{
             margin-top:10px;

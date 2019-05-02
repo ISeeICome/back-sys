@@ -18,8 +18,8 @@
             </el-collapse-item>
             <el-collapse-item title="系统工具">
                 <div class='itemWrap'><router-link to="/admin/examine" class="item">审核管理</router-link></div>
-                <div class='itemWrap'><router-link to="/" class="item">退出系统</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/updateAdminPwd" class="item">修改信息</router-link></div>
+                <div class='itemWrap'><router-link to="/" class="item">退出系统</router-link></div>
             </el-collapse-item>
         </el-collapse>
         <div class="admin">
