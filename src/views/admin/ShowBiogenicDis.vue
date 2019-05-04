@@ -22,7 +22,7 @@
               </el-select>
               <el-button type="success" id="subBtn" @click="search">查询</el-button>
         </div>
-      <div id="echart1"></div>
+      <div id="echart1" v-show="isShowEchart1"></div>
       <div id="echart2"></div>
     </div>
 </template>
@@ -56,7 +56,8 @@ export default {
       gradeOptions: [],
       grade: '',
       conOptions: ['班级人数', '就业状态', '生源地'],
-      con: ''
+      con: '',
+      isShowEchart1: true
     }
   },
   methods: {
@@ -65,6 +66,7 @@ export default {
       echart.setOption(option)
     },
     search () {
+      // this.isShowEchart1 = false
       var that = this
       this.$axios.post('http://127.0.0.1:3000/getCount', {
         params: {
@@ -73,50 +75,69 @@ export default {
         }
       }).then(res => {
         var result = res.data
-        console.log(result)
-        if (result.code === 1) {
-          that.workCount = result.workCount
-          that.notWorkCount = result.notWorkCount
-          // var titleText = '';
-          // if(that.con === '班级人数'){
-          //   titleText = '班级人数'
-          // }
-          // if(that.con === '就业状态'){}
-          // if(that.con === '生源地'){}
-          that.option1 = {
-            title: {
-              text: '就业形式'
-            },
-            tooltip: {
-              trigger: 'item',
-              formatter: '{a} <br/>{b} : {c} ({d}%)'
-            },
-            legend: {
-              orient: 'vertical',
-              left: 'left',
-              data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-            },
-            series: [
-              {
-                name: '访问来源',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '60%'],
-                data: [
-                  {value: that.workCount, name: '已就业'},
-                  {value: that.notWorkCount, name: '未就业'}
-                ],
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                  }
+        // var option1Center = [];
+        var option1data = []
+        var groupData = []
+        var countData = []
+
+        result.data.forEach((item, index) => {
+          if (that.con === '生源地') {
+            groupData.push(item.fromCity)
+            option1data.push({value: item.count, name: item.fromCity})
+          } else {
+            groupData.push(item.className)
+            option1data.push({value: item.count, name: item.className})
+          }
+          countData.push(item.count)
+        })
+        that.option1 = {
+          title: {
+            text: that.con
+          },
+          tooltip: {
+            trigger: 'item' + '--饼图',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+          },
+          series: [
+            {
+              name: '',
+              type: 'pie',
+              radius: '55%',
+              center: ['50%', '60%'],
+              data: option1data,
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
               }
-            ]
+            }
+          ]
+        }
+        that.createEchart(document.getElementById('echart1'), that.option1)
+        console.log(result.data)
+        if (result.code === 1) {
+          that.option2 = {
+            title: {
+              text: that.con + '--柱状图'
+            },
+            tooltip: {},
+            legend: {
+              data: ['人数']
+            },
+            xAxis: {
+              data: groupData
+            },
+            yAxis: {},
+            series: [{
+              name: '人数',
+              type: 'bar',
+              data: countData
+            }]
           }
-          that.createEchart(document.getElementById('echart1'), that.option1)
+          console.log(that.option2)
+          that.createEchart(document.getElementById('echart2'), that.option2)
         } else {
           alert('查询失败', result.msg)
         }
@@ -135,7 +156,7 @@ export default {
         that.notWorkCount = result.notWorkCount
         that.option1 = {
           title: {
-            text: '就业形式'
+            text: '就业形式--饼图'
           },
           tooltip: {
             trigger: 'item',
@@ -187,7 +208,7 @@ export default {
       if (result.code === 1) {
         that.option2 = {
           title: {
-            text: '各届就业详情'
+            text: '各届就业详情--柱状图'
           },
           tooltip: {},
           legend: {
