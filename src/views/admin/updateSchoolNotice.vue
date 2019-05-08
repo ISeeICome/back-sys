@@ -99,7 +99,6 @@ export default {
   .releaseSchoolNotice{
         width:1300px;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         .statusBar{
             padding:10px 0 0 0;
@@ -141,7 +140,10 @@ export default {
             }
           }
         }
-        #subBtn{
+        #backBtn{
+          float:left;
+        }
+        .el-button--success{
           float:right;
           margin-right:50px;
         }

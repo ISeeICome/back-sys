@@ -7,7 +7,7 @@
             <thead>
               <tr>
                 <td colspan="2">
-                  <img src="../../static/img/logo.png" alt="">
+                  <!-- <img src="../../static/img/logo.png" alt=""> -->
                   <span>后台登录</span>
                 </td>
               </tr>
@@ -81,8 +81,9 @@ export default {
 .login{
     width:100%;
     height:700px;
-    background: url("../../static/img/body_bg2.png") center bottom no-repeat;
+    background: url("../../static/img/body_bg.jpg") center bottom no-repeat;
     background-color:#fff;
+    background-size: cover;
     position:relative;
     .loginWrap{
       width: 500px;
@@ -97,7 +98,6 @@ export default {
             font-size: 30px;
             color:#fff;
             font-weight: bold;
-            float:right;
             line-height:80px;
             margin-right:20px;
           }
@@ -117,7 +117,7 @@ export default {
       width: 600px;
       background: #000;
       opacity: .6;
-      filter: Alpha(opacity=60);
+      filter: Alpha(opacity=40);
       border-radius: 31px;
       position: absolute;
       top: 120px;
@@ -129,8 +129,10 @@ export default {
     }
     .btnList{
       text-align:center;
+      margin-top:50px;
       .el-button{
-        margin:10px 20px;
+        float:right;
+        margin-right:80px;
       }
     }
     .selectClass, .selectGrade{

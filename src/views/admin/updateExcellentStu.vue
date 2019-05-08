@@ -29,10 +29,10 @@
           </tr>
           <tr>
             <td>
-              <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
+               <el-button type="primary" @click="goBack" id="backBtn">返回</el-button>
             </td>
             <td>
-              <el-button type="success" @click="updateExcellentStu">修改</el-button>
+                <el-button type="success" @click="updateExcellentStu">修改</el-button>
             </td>
           </tr>
         </tbody>
@@ -106,7 +106,6 @@ export default {
   .releaseExcellentStu{
         width:1300px;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         .statusBar{
             padding:10px 0 0 0;
@@ -121,7 +120,7 @@ export default {
         }
         table{
           margin-top: 30px;
-          width:55%;
+          width:60%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);
@@ -148,7 +147,10 @@ export default {
             }
           }
         }
-        #subBtn{
+        #backBtn{
+          float:left;
+        }
+        .el-button--success{
           float:right;
           margin-right:50px;
         }

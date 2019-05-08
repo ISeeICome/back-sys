@@ -35,6 +35,7 @@
                         <td>年级</td>
                         <td>班级</td>
                         <td>联系电话</td>
+                        <td>邮箱</td>
                         <td>工作单位</td>
                         <td>就业省市</td>
                         <td>生源地</td>
@@ -49,6 +50,7 @@
                         <td>{{item.grade}}</td>
                         <td>{{item.className}}</td>
                         <td>{{item.tel}}</td>
+                        <td>{{item.email}}</td>
                         <td>{{item.company}}</td>
                         <td>{{item.workCity}}</td>
                         <td>{{item.fromCity}}</td>
@@ -226,6 +228,7 @@ export default {
       grade: '',
       className: '',
       stuName: '',
+      email: '',
       gradeOptions: [],
       majorOptions: [],
       classOptions: [],
@@ -260,7 +263,6 @@ export default {
 <style lang="scss" scoped>
     .stuInfo{
         padding:10px 0 0 15px;
-        margin-left:180px;
         .statusBar{
             padding:10px 0 0 0;
             height:30px;
@@ -274,7 +276,7 @@ export default {
         }
         .searchBar{
             padding-top:6px;
-            width: 1300px;
+            // width: 1300px;
             label{
                 line-height:40px;
                 width:100px;
@@ -293,7 +295,7 @@ export default {
             }
         }
         .stuInfoTable{
-            width: 1300px;
+            // width: 1300px;
             padding:0 30px 0 0;
             table{
                 font-size: 14px;

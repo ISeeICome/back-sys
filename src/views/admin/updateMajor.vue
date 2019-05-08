@@ -86,7 +86,6 @@ export default {
         width:800px;
         margin: 0 auto;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         margin:0 auto;
         table{

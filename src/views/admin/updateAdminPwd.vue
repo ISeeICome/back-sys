@@ -62,7 +62,6 @@ export default {
 .updateAdminPwd{
     margin: 0 auto;
     padding:10px 0 0 15px;
-    margin-left:180px;
     position:relative;
     .statusBar{
         padding:10px 0 0 0;

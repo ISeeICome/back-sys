@@ -10,7 +10,7 @@
                 <div class='itemWrap'><router-link to="/admin/excellentStuManage" class="item">杰出校友管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/recruitManage" class="item">校友招聘管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/helpManage" class="item">校友帮扶管理</router-link></div>
-                <div class='itemWrap'><router-link to="/admin/schoolNoticeManage" class="item">公告管理</router-link></div>
+                <div class='itemWrap'><router-link to="/admin/schoolNoticeManage" class="item">学校公告管理</router-link></div>
             </el-collapse-item>
             <el-collapse-item title="管理员管理">
                 <div class='itemWrap'><router-link to="/admin/commonAdmin" class="item">普通管理员</router-link></div>
@@ -57,11 +57,8 @@ export default {
 <style lang="scss">
     .slider{
         .el-collapse{
-            background-color:#293038;
-            position:fixed;
             width:180px;
-            top:80px;
-            bottom:0;
+            height:100%;
             overflow: hidden;
             .el-collapse-item__header{
                 background-color: #22282e;

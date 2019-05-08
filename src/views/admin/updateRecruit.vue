@@ -26,11 +26,13 @@
             <td><label for="">工作单位：</label></td>
             <td><el-input v-model="workAddress" placeholder="请输入工作地址"></el-input></td>
           </tr>
+          <tr>
+            <td><el-button type="primary" @click="goBack" id="backBtn">返回</el-button></td>
+            <td><el-button type="success" id="addBtn"  @click="updateRecruit">修改</el-button></td>
+          </tr>
         </tbody>
       </table>
       <div>
-        <el-button type="primary" @click="goBack">返回</el-button>
-        <el-button type="success" id="addBtn"  @click="updateRecruit">修改</el-button>
       </div>
     </div>
 </template>
@@ -102,7 +104,6 @@ export default {
   .recruitInfo{
         width:1300px;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         .statusBar{
             padding:10px 0 0 0;
@@ -142,12 +143,10 @@ export default {
             }
           }
         }
-        .el-button--success{
-          float:right;
-          margin-right:60px;
-          margin-top:20px;
+        #backBtn{
+          float:left;
         }
-        #addBtn{
+        .el-button--success{
           float:right;
           margin-right:50px;
         }

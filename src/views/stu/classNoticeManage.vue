@@ -46,7 +46,7 @@ export default {
       return str.replace('/n', '<br/>')
     },
     toAddClassNotice () {
-      this.$router.push({path: '/admin/addClassNotice'})
+      this.$router.push({path: '/stu/addClassNotice'})
     },
     getNumber (index) {
       return (this.currentPage - 1) * 10 + index

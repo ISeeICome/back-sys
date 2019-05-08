@@ -7,7 +7,6 @@
             <thead>
               <tr>
                 <td colspan="2">
-                  <img src="../../static/img/logo.png" alt="">
                   <span>校友注册</span>
                 </td>
               </tr>
@@ -60,6 +59,10 @@
                 <td><el-input v-model="tel" placeholder="请输入联系电话"></el-input></td>
               </tr>
               <tr>
+                <td><label for="">邮&ensp;&ensp;&ensp;&ensp;箱：</label></td>
+                <td><el-input v-model="email" placeholder="请输入邮箱"></el-input></td>
+              </tr>
+              <tr>
                 <td><label for="">工作单位：</label></td>
                 <td><el-input v-model="company" placeholder="请输入内容"></el-input></td>
               </tr>
@@ -86,7 +89,6 @@
             <thead>
               <tr>
                 <td colspan="2">
-                  <img src="../../static/img/logo.png" alt="">
                   <span>校友登录</span>
                 </td>
               </tr>
@@ -130,6 +132,7 @@ export default {
       workCity: '',
       fromCity: '',
       tel: '',
+      email: '',
       grade: '',
       className: '',
       classList: [],
@@ -161,7 +164,7 @@ export default {
         alert('密码输入错误，请重新输入')
         return
       }
-      if (this.userName === '' || this.stuName === '' || this.pwd1 === '' || this.pwd2 === '' || this.majorName === '' || this.grade === '' || this.className === '') {
+      if (this.userName === '' || this.stuName === '' || this.pwd1 === '' || this.pwd2 === '' || this.majorName === '' || this.grade === '' || this.className === '' || this.email === '') {
         alert('姓名、年级、班级为必填项，请输入完整')
         return
       }
@@ -174,6 +177,7 @@ export default {
           majorName: this.majorName,
           className: this.className,
           tel: this.tel,
+          email: this.email,
           company: this.company,
           workCity: this.workCity,
           fromCity: this.fromCity
@@ -238,8 +242,9 @@ export default {
 .register{
     width:100%;
     height:700px;
-    background: url("../../static/img/body_bg2.png") center bottom no-repeat;
+    background: url("../../static/img/body_bg.jpg") center bottom no-repeat;
     background-color:#fff;
+    background-size: cover;
     position:relative;
     .registerWrap{
       width: 500px;
@@ -252,10 +257,9 @@ export default {
         thead{
           span{
             font-size: 30px;
+            line-height: 40px;
             color:#fff;
             font-weight: bold;
-            float:right;
-            line-height:80px;
             margin-right:20px;
           }
         }
@@ -270,7 +274,7 @@ export default {
       height:300px;
       background: #000;
       opacity: .6;
-      filter: Alpha(opacity=60);
+      filter: Alpha(opacity=50);
       border-radius: 31px;
       position: absolute;
       top: 30px;
@@ -293,8 +297,9 @@ export default {
 .login{
     width:100%;
     height:700px;
-    background: url("../../static/img/body_bg2.png") center bottom no-repeat;
+    background: url("../../static/img/body_bg.jpg") center bottom no-repeat;
     background-color:#fff;
+    background-size: cover;
     position:relative;
     .loginWrap{
       width: 500px;
@@ -307,10 +312,9 @@ export default {
         thead{
           span{
             font-size: 30px;
+            line-height: 80px;
             color:#fff;
             font-weight: bold;
-            float:right;
-            line-height:80px;
             margin-right:20px;
           }
         }
@@ -324,7 +328,7 @@ export default {
       width: 600px;
       background: #000;
       opacity: .6;
-      filter: Alpha(opacity=60);
+      filter: Alpha(opacity=50);
       border-radius: 31px;
       position: absolute;
       top: 120px;
@@ -333,9 +337,11 @@ export default {
       left:50%;
       margin-left:-300px;
       height:320px;
+      border:1px solid #999;
     }
     .btnList{
       text-align:center;
+      margin-top:50px;
       .el-button{
         margin:10px 20px;
       }

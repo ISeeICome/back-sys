@@ -89,7 +89,7 @@ export default {
         table{
           margin-top: 30px;
           padding-top:10px;
-          width:90%;
+          width:60%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);

@@ -44,6 +44,10 @@
             <td><el-input v-model="tel" placeholder="请输入联系电话"></el-input></td>
           </tr>
           <tr>
+            <td><label for="">邮箱：</label></td>
+            <td><el-input v-model="email" placeholder="请输入邮箱"></el-input></td>
+          </tr>
+          <tr>
             <td><label for="">工作单位：</label></td>
             <td><el-input v-model="company" placeholder="请输入内容"></el-input></td>
           </tr>
@@ -95,7 +99,7 @@ export default {
     },
     addStu () {
       if (this.userName === '' || this.stuName === '' || this.grade === '' || this.className === '') {
-        alert('学号、姓名、年级、专业、班级为必填项，请输入完整')
+        alert('用户名,姓名、年级、班级为必填项，请输入完整')
         return
       }
       console.log(this.className)
@@ -108,6 +112,7 @@ export default {
           majorName: this.majorName,
           className: this.className,
           tel: this.tel,
+          email: this.email,
           company: this.company,
           workCity: this.workCity,
           fromCity: this.fromCity
@@ -131,6 +136,7 @@ export default {
       company: '',
       workCity: '',
       fromCity: '',
+      email: '',
       tel: '',
       grade: '',
       className: '',
@@ -164,16 +170,14 @@ export default {
 
 <style lang="scss" scoped>
   .addStuInfo{
-        width:800px;
         margin: 0 auto;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         margin:0 auto;
         table{
           margin-top: 30px;
           padding-top:10px;
-          width:90%;
+          width:60%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);

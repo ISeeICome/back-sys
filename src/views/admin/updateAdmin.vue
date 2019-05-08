@@ -104,7 +104,6 @@ export default {
 <style lang="scss" scoped>
     .updateAdmin{
         padding:10px 0 0 15px;
-        margin-left:180px;
         .statusBar{
             padding:10px 0 0 0;
             height:30px;

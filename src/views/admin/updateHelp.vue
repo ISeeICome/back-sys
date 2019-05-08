@@ -24,12 +24,12 @@
                         v-model="content">
                     </el-input></td>
                 </tr>
+                <tr>
+                  <td><el-button type="primary" @click="goBack">返回</el-button></td>
+                  <td><el-button type="success" id="addBtn"  @click="updateHelp">修改</el-button></td>
+                </tr>
             </tbody>
         </table>
-        <div class="btnList">
-            <el-button type="primary" @click="goBack">返回</el-button>
-            <el-button type="success" id="addBtn"  @click="updateHelp">修改</el-button>
-        </div>
       </div>
     </div>
 </template>
@@ -98,7 +98,6 @@ export default {
   .recruitInfo{
         width:1300px;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         .statusBar{
             padding:10px 0 0 0;
@@ -141,20 +140,12 @@ export default {
             }
           }
         }
-        .btnList{
-            // width:700px;
-            width:100%;
-            position: relative;
-            display: flex;
-            justify-content:center;
-            margin-top:10px;
+        #backBtn{
+          float:left;
         }
         .el-button--success{
-        //   margin-right:60px;
-        //   margin-top:20px;
-        }
-        #addBtn{
-        //   margin-right:50px;
+          float:right;
+          margin-right:50px;
         }
   }
 </style>

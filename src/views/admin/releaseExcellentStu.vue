@@ -91,7 +91,6 @@ export default {
   .releaseExcellentStu{
         width:1300px;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         .statusBar{
             padding:10px 0 0 0;
@@ -106,7 +105,7 @@ export default {
         }
         table{
           margin-top: 30px;
-          width:55%;
+          width:60%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);

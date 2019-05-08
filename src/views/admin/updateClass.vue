@@ -124,13 +124,12 @@ export default {
         width:800px;
         margin: 0 auto;
         padding:10px 0 0 15px;
-        margin-left:180px;
         position:relative;
         margin:0 auto;
         table{
           margin-top: 30px;
           padding-top:10px;
-          width:90%;
+          width:60%;
           position:absolute;
           left:50%;
           transform: translate(-50%,0);
