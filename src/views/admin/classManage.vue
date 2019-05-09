@@ -10,8 +10,11 @@
                         <td>序号</td>
                         <td>班级编号</td>
                         <td>年级</td>
+                        <td>入学时间</td>
+                        <td>班级类型</td>
+                        <td>学制</td>
                         <td>班级名称</td>
-                        <td>人数</td>
+                        <td>注册人数</td>
                         <td class="setting">操作</td>
                     </tr>
                 </thead>
@@ -20,6 +23,9 @@
                         <td>{{ getNumber ( index +1 ) }}</td>
                         <td>{{item.classNum}}</td>
                         <td>{{item.grade}}</td>
+                        <td>{{item.studyTime}}</td>
+                        <td>{{item.eduType}}</td>
+                        <td>{{item.eduSys}}</td>
                         <td>{{item.className}}</td>
                         <td><span>{{countArr[index]}}</span></td>
                         <td>

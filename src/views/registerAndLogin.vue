@@ -63,6 +63,10 @@
                 <td><el-input v-model="email" placeholder="请输入邮箱"></el-input></td>
               </tr>
               <tr>
+                <td><label for="">行业：</label></td>
+                <td><el-input v-model="industry" placeholder="请输入行业"></el-input></td>
+              </tr>
+              <tr>
                 <td><label for="">工作单位：</label></td>
                 <td><el-input v-model="company" placeholder="请输入内容"></el-input></td>
               </tr>
@@ -141,7 +145,8 @@ export default {
       pwd1: '',
       pwd2: '',
       loginPwd: '',
-      loginUserName: ''
+      loginUserName: '',
+      industry: ''
     }
   },
   methods: {
@@ -180,7 +185,8 @@ export default {
           email: this.email,
           company: this.company,
           workCity: this.workCity,
-          fromCity: this.fromCity
+          fromCity: this.fromCity,
+          industry: this.industry
         }
       }).then(res => {
         var result = res.data

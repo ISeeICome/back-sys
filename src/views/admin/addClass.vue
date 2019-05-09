@@ -15,6 +15,27 @@
             <td><el-input v-model="grade" placeholder="请输入年级"></el-input></td>
           </tr>
           <tr>
+            <td><label for="">入学时间：</label></td>
+            <td><el-input v-model="studyTime" placeholder="请输入年级"></el-input></td>
+          </tr>
+          <tr>
+            <td><label for="">班级类型：</label></td>
+            <td>
+               <el-select v-model="eduType" placeholder="请选择" class="selectEduType">
+                <el-option
+                  v-for="(item, index) in typeOptions"
+                  :key="index"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="">学制：</label></td>
+            <td><el-input v-model="eduSys" placeholder="请输入学制年数" class= "selectEduSys"></el-input></td>
+          </tr>
+          <tr>
             <td><label for="">班级名称</label></td>
             <td><el-input v-model="className" placeholder="请输入班级名称"></el-input></td>
           </tr>
@@ -44,7 +65,20 @@ export default {
     return {
       grade: '',
       className: '',
-      classNum: ''
+      classNum: '',
+      studyTime: '',
+      eduType: '',
+      eduSys: '',
+      typeOptions: [
+        {
+          label: '统招',
+          value: '统招'
+        },
+        {
+          label: '夜校',
+          value: '夜校'
+        }
+      ]
     }
   },
   methods: {
@@ -60,7 +94,10 @@ export default {
         params: {
           grade: this.grade,
           className: this.className,
-          classNum: this.classNum
+          classNum: this.classNum,
+          studyTime: this.studyTime,
+          eduType: this.eduType,
+          eduSys: this.eduSys
         }
       }).then(res => {
         var result = res.data
@@ -127,6 +164,12 @@ export default {
           width:100%;
         }
         .selectGrade{
+          width:100%;
+        }
+        .selectEduType{
+          width:100%;
+        }
+        .selectEduSys{
           width:100%;
         }
   }

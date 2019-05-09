@@ -21,6 +21,10 @@
             <td><label for="">邮箱：</label></td>
             <td><el-input v-model="email" placeholder="请输入邮箱"></el-input></td>
           </tr>
+           <tr>
+            <td><label for="">行业</label></td>
+            <td><el-input v-model="industry" placeholder="请输入行业"></el-input></td>
+          </tr>
           <tr>
             <td><label for="">工作单位：</label></td>
             <td><el-input v-model="company" placeholder="请输入内容"></el-input></td>
@@ -99,7 +103,8 @@ export default {
           company: this.company,
           workCity: this.workCity,
           fromCity: this.fromCity,
-          isClassAdmin: this.isClassAdmin
+          isClassAdmin: this.isClassAdmin,
+          industry: this.industry
         }
       }).then(res => {
         var result = res.data
@@ -128,6 +133,7 @@ export default {
       gradeOptions: [],
       majorOptions: [],
       classOptions: [],
+      industry: '',
       isClassAdmin: '',
       classAdminOptions: [
         {label: '班级管理员', value: 1},
@@ -157,6 +163,7 @@ export default {
         that.workCity = result.data[0].workCity
         that.fromCity = result.data[0].fromCity
         that.isClassAdmin = result.data[0].isClassAdmin
+        that.industry = result.data[0].industry
         if (result.data[0].isClassAdmin === 1) { that.isClassAdmin = '班级管理员' } else {
           that.isClassAdmin = '无'
         }

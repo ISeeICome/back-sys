@@ -12,15 +12,15 @@
                 </el-option>
               </el-select>
             <label>查询内容</label>
-              <el-select v-model="con" placeholder="请选择" class="selectGrade">
-                <el-option
-                  v-for="(item, index) in conOptions"
-                  :key="index"
-                  :label="item"
-                  :value="item">
-                </el-option>
-              </el-select>
-              <el-button type="success" id="subBtn" @click="search">查询</el-button>
+            <el-select v-model="con" placeholder="请选择" class="selectGrade">
+              <el-option
+                v-for="(item, index) in conOptions"
+                :key="index"
+                :label="item"
+                :value="item">
+              </el-option>
+            </el-select>
+            <el-button type="success" id="subBtn" @click="search">查询</el-button>
         </div>
       <div id="echart1" v-show="isShowEchart1"></div>
       <div id="echart2"></div>
@@ -55,7 +55,7 @@ export default {
       option2: [],
       gradeOptions: [],
       grade: '',
-      conOptions: ['班级人数', '就业状态', '生源地'],
+      conOptions: ['班级人数', '就业状态','行业', '就业省市', '生源地'],
       con: '',
       isShowEchart1: true
     }
@@ -84,9 +84,22 @@ export default {
           if (that.con === '生源地') {
             groupData.push(item.fromCity)
             option1data.push({value: item.count, name: item.fromCity})
-          } else {
+          }
+          if (that.con === '班级人数') {
             groupData.push(item.className)
             option1data.push({value: item.count, name: item.className})
+          }
+          if (that.con === '就业省市') {
+            groupData.push(item.workCity)
+            option1data.push({value: item.count, name: item.workCity})
+          }
+          if (that.con === '就业状态') {
+            groupData.push(item.className)
+            option1data.push({value: item.count, name: item.className})
+          }
+          if (that.con === '行业') {
+            groupData.push(item.industry)
+            option1data.push({value: item.count, name: item.industry})
           }
           countData.push(item.count)
         })

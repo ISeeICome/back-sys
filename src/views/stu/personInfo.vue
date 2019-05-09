@@ -26,6 +26,10 @@
             <td><el-input v-model="tel" placeholder="请输入联系电话"></el-input></td>
           </tr>
           <tr>
+            <td><label for="">邮箱：</label></td>
+            <td><el-input v-model="email" placeholder="请输入邮箱"></el-input></td>
+          </tr>
+          <tr>
             <td><label for="">工作单位：</label></td>
             <td><el-input v-model="company" placeholder="请输入内容"></el-input></td>
           </tr>
@@ -115,6 +119,7 @@ export default {
           that.grade = result.data[0].grade
           that.className = result.data[0].className
           that.tel = result.data[0].tel
+          that.email = result.data[0].email
           that.company = result.data[0].company
           that.workCity = result.data[0].workCity
           that.fromCity = result.data[0].fromCity
@@ -134,6 +139,7 @@ export default {
       workCity: '',
       fromCity: '',
       tel: '',
+      email: '',
       grade: '',
       className: '',
       classList: [],
