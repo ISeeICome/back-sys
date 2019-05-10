@@ -55,7 +55,7 @@ export default {
       option2: [],
       gradeOptions: [],
       grade: '',
-      conOptions: ['班级人数', '就业状态','行业', '就业省市', '生源地'],
+      conOptions: ['班级人数', '就业状态', '行业', '就业省市', '生源地'],
       con: '',
       isShowEchart1: true
     }
