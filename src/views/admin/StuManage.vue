@@ -82,9 +82,9 @@ export default {
   methods: {
     exportExcel () {
       require.ensure([], () => {
-        const tHeader = ['ID', '姓名', '年级', '班级', '联系电话', '工作单位', '就业省市', '生源地', '权限']
-        const filterVal = ['ID', 'stuName', 'grade', 'className', 'tel', 'company', 'workCity', 'fromCity', 'isClassAdmin']
-        const list = this.tableData
+        const tHeader = ['ID', '姓名', '年级', '班级', '联系电话', '行业', '工作单位', '就业省市', '生源地', '权限']
+        const filterVal = ['ID', 'stuName', 'grade', 'className', 'tel', 'industry', 'company', 'workCity', 'fromCity', 'isClassAdmin']
+        const list = this.allData
         const data = this.formatJson(filterVal, list)
         exportJsonToExcel(tHeader, data, '列表excel')
       })
@@ -141,7 +141,7 @@ export default {
         console.log(result)
         if (result.code === 1) {
           alert('删除成功')
-          this.getStudelStuList(this.currentPage)
+          this.getStuList(this.currentPage)
         } else {
           alert('删除失败', result.msg)
         }
@@ -179,7 +179,8 @@ export default {
           this.dataList = result.data
           this.tableData = result.data
           this.totalSize = result.totalSize
-          console.log(this.totalSize)
+          this.allData = result.allData
+          console.log(this.allData)
         } else {
           alert('查询失败', result.msg)
         }
@@ -201,7 +202,8 @@ export default {
         if (result.code === 1) {
           this.dataList = result.data
           this.totalSize = result.totalSize
-          console.log(this.totalSize)
+          this.allData = result.allData
+          console.log(this.allData)
         } else {
           alert('查询失败', result.msg)
         }
@@ -232,7 +234,8 @@ export default {
       gradeOptions: [],
       majorOptions: [],
       classOptions: [],
-      tableData: []
+      tableData: [],
+      allData: []
     }
   },
   mounted () {
@@ -252,7 +255,6 @@ export default {
           }
         })
         that.gradeOptions = that.gradeOptions.sort().reverse()
-        console.log(that.gradeOptions)
       }
     })
     this.getStuList(this.currentPage)
