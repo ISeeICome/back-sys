@@ -3,7 +3,9 @@
         <Vheader></Vheader>
         <div class="content">
           <adminVslider id = 'slide'></adminVslider>
-          <router-view id= 'con'></router-view>
+          <keep-alive include = 'stuManage,classManage'>
+            <router-view id= 'con'></router-view>
+          </keep-alive>
         </div>
     </div>
 </template>

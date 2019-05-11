@@ -16,7 +16,8 @@ export default {
   data () {
     return {
       adminName: '',
-      adminPwd: ''
+      adminPwd: '',
+      adminPower: ''
     }
   },
   methods: {
@@ -25,7 +26,7 @@ export default {
         params: {
           adminName: this.adminName,
           adminPwd: this.adminPwd,
-          adminPower: '1',
+          adminPower: this.adminPower,
           ID: this.ID
         }
       }).then(res => {
@@ -51,6 +52,7 @@ export default {
       if (result.code === 1) {
         that.adminName = result.data[0].adminName
         that.adminPwd = result.data[0].adminPwd
+        that.adminPower = result.data[0].adminPower
       } else {
         alert('查询失败', result.msg)
       }

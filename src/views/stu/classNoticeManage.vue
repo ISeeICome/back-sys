@@ -38,7 +38,9 @@ export default {
       currentPage: 1,
       pageSize: 3,
       totalSize: 0,
-      isClassAdmin: ''
+      isClassAdmin: '',
+      className: '',
+      grade: ''
     }
   },
   methods: {
@@ -95,7 +97,8 @@ export default {
       this.$axios.post('http://127.0.0.1:3000/getClassNoticeList', {
         params: {
           page: currentPage,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          className: this.className
         }
       }).then(res => {
         var result = res.data
@@ -115,6 +118,7 @@ export default {
   },
   mounted () {
     this.getClassNotice(this.currentPage)
+    this.className = localStorage.getItem('className')
     if (localStorage.getItem('isClassAdmin') === '1') {
       this.isClassAdmin = true
     } else {

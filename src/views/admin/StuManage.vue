@@ -78,7 +78,7 @@
 <script>
 import { export_json_to_excel as exportJsonToExcel } from '../../excel/Export2Excel'
 export default {
-  name: 'stuInfoMg',
+  name: 'stuManage',
   methods: {
     exportExcel () {
       require.ensure([], () => {
@@ -187,6 +187,7 @@ export default {
       })
     },
     updateStu (ID) {
+      localStorage.setItem('stuHistoryPage', this.currentPage)
       this.$router.push({ path: `/admin/updateStu/${ID}` })
     },
     search () {
@@ -237,6 +238,10 @@ export default {
       tableData: [],
       allData: []
     }
+  },
+  activated () {
+    this.currentPage = parseInt(localStorage.getItem('stuHistoryPage'))
+    this.handleCurrentChange(this.currentPage)
   },
   mounted () {
     var that = this

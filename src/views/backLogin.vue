@@ -63,6 +63,8 @@ export default {
           console.log(result)
           if (result.code === 1) {
             localStorage.setItem('ID', result.data[0].ID)
+            localStorage.setItem('stuHistoryPage', 1)
+            localStorage.setItem('classHistoryPage', 1)
             this.$router.push({path: '/admin'})
           } else {
             alert('登录失败', result.msg)

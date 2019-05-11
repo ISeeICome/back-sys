@@ -12,7 +12,7 @@
                 <div class='itemWrap'><router-link to="/admin/helpManage" class="item">校友帮扶管理</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/schoolNoticeManage" class="item">学校公告管理</router-link></div>
             </el-collapse-item>
-            <el-collapse-item title="管理员管理">
+            <el-collapse-item title="管理员管理" v-show="adminPower">
                 <div class='itemWrap'><router-link to="/admin/commonAdmin" class="item">普通管理员</router-link></div>
                 <div class='itemWrap'><router-link to="/admin/superAdmin" class="item">超级管理员</router-link></div>
             </el-collapse-item>
@@ -33,7 +33,8 @@ export default {
   name: 'slider',
   data () {
     return {
-      adminName: ''
+      adminName: '',
+      adminPower: ''
     }
   },
   mounted () {
@@ -47,6 +48,8 @@ export default {
       var result = res.data
       if (result.code === 1) {
         that.adminName = result.data[0].adminName
+        that.adminPower = result.data[0].adminPower
+        console.log(that.adminPower)
       } else {
       }
     })

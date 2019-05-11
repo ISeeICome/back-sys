@@ -103,12 +103,14 @@ export default {
           }
           countData.push(item.count)
         })
+        console.log('类别')
+        console.log(this.groupData)
         that.option1 = {
           title: {
-            text: that.con
+            text: that.con + '--饼图'
           },
           tooltip: {
-            trigger: 'item' + '--饼图',
+            trigger: 'item',
             formatter: '{a} <br/>{b} : {c} ({d}%)'
           },
           series: [
@@ -285,17 +287,17 @@ export default {
         }
     }
     #echart1{
-      height:400px;
-      width:400px;
+      height:500px;
+      width:500px;
       float:left;
-      margin-left:30px;
+      // margin-left:30px;
       margin-top:40px;
     }
     #echart2{
       height:500px;
       width:800px;
       float:left;
-      margin-left:50px;
+      // margin-left:50px;
       margin-top:40px;
     }
   }

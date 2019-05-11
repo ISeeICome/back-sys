@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'majorInfo',
+  name: 'classManage',
   data () {
     return {
       dataList: '',
@@ -110,8 +110,6 @@ export default {
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
-      // var getCount = async () => {
-      //   await
       this.$axios.post('http://127.0.0.1:3000/getClassList', {
         params: {
           page: this.currentPage
@@ -129,8 +127,6 @@ export default {
           alert('查询失败', result.msg)
         }
       })
-      // }
-      // getCount()
     },
     getClassList (currentPage) {
       this.$axios.post('http://127.0.0.1:3000/getClassList', {
@@ -154,8 +150,13 @@ export default {
       })
     },
     updateClass (ID) {
+      localStorage.setItem('classHistoryPage', this.currentPage)
       this.$router.push({ path: `/admin/updateClass/${ID}` })
     }
+  },
+  activated () {
+    this.currentPage = parseInt(localStorage.getItem('classHistoryPage'))
+    this.handleCurrentChange(this.currentPage)
   },
   mounted () {
     this.getClassList(this.currentPage)

@@ -75,7 +75,10 @@ export default new Router({
         {
           path: 'StuManage',
           name: 'StuManage',
-          component: StuManage
+          component: StuManage,
+          meta: {
+            keepAlive: true
+          }
         },
         {
           path: 'schoolNoticeManage',
